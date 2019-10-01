@@ -1,5 +1,6 @@
 package com.timmist24.timsoresnstones;
 
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 
 public class StonePiece extends Item {
@@ -8,5 +9,6 @@ public class StonePiece extends Item {
     public StonePiece(String name){
         super();
         this.name = name;
+        //setCreativeTab("Tim's resorces");
     }
 }
