@@ -1,6 +1,4 @@
-package com.timmist24.timsoresnstones;
-
-import net.minecraft.item.Item;
+package com.timmist24.timsoresnstones.util;
 
 public class OrePiece extends StonePiece {
     private final String ingotName;

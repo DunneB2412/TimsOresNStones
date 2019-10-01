@@ -1,4 +1,4 @@
-package com.timmist24.timsoresnstones;
+package com.timmist24.timsoresnstones.util;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
