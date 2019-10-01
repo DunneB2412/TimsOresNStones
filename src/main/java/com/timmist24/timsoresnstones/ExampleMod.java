@@ -30,6 +30,7 @@ public class ExampleMod
         // some example code
         logger.info("DIRT BLOCK >> {}", Blocks.DIRT.getRegistryName());
         Item test = new Item();
+        test.setUnlocalizedName("test");
         test.setCreativeTab(CreativeTabs.DECORATIONS);
     }
 }
