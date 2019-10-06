@@ -1,4 +1,4 @@
-package com.timmist24.timsoresnstones.util;
+package com.timmist24.timsoresnstones.items;
 
 public class OrePiece extends StonePiece {
     private final String ingotName;
