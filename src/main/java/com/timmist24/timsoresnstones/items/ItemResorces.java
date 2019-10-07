@@ -8,7 +8,7 @@ public class ItemResorces extends ItemBase {
     static final CreativeTabs tabTimsResorces = (new CreativeTabs("tabTimsResorces") {
 
         public ItemStack getTabIconItem() {
-            return new ItemStack(ModItems.RESORCE_ICON);
+            return new ItemStack(ModItems.STONE_PIECE);
         }
 
     });
