@@ -4,17 +4,18 @@ import com.timmist24.timsoresnstones.init.ModItems;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 
-public class ItemResorces extends ItemBase {
-    static final CreativeTabs tabTimsResorces = (new CreativeTabs("tabTimsResorces") {
+public class ItemBlock extends ItemBase {
+    static final CreativeTabs tabTimsBlocks = (new CreativeTabs("tabTimsResorces") {
 
         public ItemStack getTabIconItem() {
-            return new ItemStack(ModItems.RESORCE_ICON);
+            return new ItemStack(ModItems.BLOCK_ICON);
         }
 
     });
-    public ItemResorces(String itemName) {
+
+    public ItemBlock(String itemName) {
         super(itemName);
 
-        this.setCreativeTab(tabTimsResorces);
+        this.setCreativeTab(tabTimsBlocks);
     }
 }
