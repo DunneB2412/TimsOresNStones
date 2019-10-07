@@ -3,6 +3,6 @@
 itemGroup.tabTimsBlocks=Tim's blocks
 itemGroup.tabTimsResorces=Tim's resorces
 
-item.resorce_icon.name=Creative Placeholder 1
 item.block_icon.name=Creative Placeholder 2
 item.stone_piece.name=Stone Piece
+item.iron_ore_piece.name=Iron ore piece
