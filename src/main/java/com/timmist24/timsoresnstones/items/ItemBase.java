@@ -11,7 +11,7 @@ public class ItemBase extends Item implements IHasModel {
     public ItemBase(String itemName) {
         setUnlocalizedName(itemName);
         setRegistryName(itemName);
-        setCreativeTab(CreativeTabs.MATERIALS);
+        setCreativeTab(CreativeTabs.MATERIALS); // temproary item location
 
         ModItems.ITEMS.add(this);
     }
