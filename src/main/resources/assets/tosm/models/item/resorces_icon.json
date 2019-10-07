@@ -1,6 +1,6 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "tosm:items/resorces_icon"
+        "layer0": "tosm:items/resorce_icon"
     }
 }
