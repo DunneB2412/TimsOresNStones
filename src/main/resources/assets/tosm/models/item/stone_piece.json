@@ -1,6 +1,7 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "tosm:items/stone_piece"
+    "layer0": "tosm:items/stone_piece",
+    "layer1": "tosm:items/darker"
   }
 }
