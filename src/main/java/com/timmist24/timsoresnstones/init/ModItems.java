@@ -14,9 +14,9 @@ public class ModItems {
 
 
     public static final Item BLOCK_ICON = new ItemBlock("block_icon");
+    public static final Item IRON_TEST = new ItemBlock("iron_test");
 
     public static final Item STONE_PIECE = new ItemStonePiece("stone_piece");
-
     public static final Item IRON_ORE_PIECE = new ItemOrePiece("iron_ore_piece", "iron");
 
 
