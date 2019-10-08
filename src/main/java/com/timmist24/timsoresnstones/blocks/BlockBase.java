@@ -15,8 +15,8 @@ public class BlockBase extends Block implements IHasModel {
     static final CreativeTabs tabTimsBlocks = (new CreativeTabs("tabTimsResorces") {
 
         public ItemStack getTabIconItem() {
-            return new ItemStack(ModItems.BLOCK_ICON);
-        } // temp icon
+            return new ItemStack(Item.getItemFromBlock(ModBlocks.COMPRESSED_IRON_ORE));
+        }
 
     });
     public BlockBase(String blockName, Material material) {
