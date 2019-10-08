@@ -1,6 +1,6 @@
 package com.timmist24.timsoresnstones.items;
 
-public class ItemStonePiece extends ItemResorces {
+public class ItemStonePiece extends ItemBase {
 
 
     public ItemStonePiece(String itemName){

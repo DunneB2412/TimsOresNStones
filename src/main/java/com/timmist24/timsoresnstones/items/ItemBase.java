@@ -5,13 +5,20 @@ import com.timmist24.timsoresnstones.init.ModItems;
 import com.timmist24.timsoresnstones.util.IHasModel;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 
 public class ItemBase extends Item implements IHasModel {
-    
+    static final CreativeTabs tabTimsResorces = (new CreativeTabs("tabTimsResorces") {
+
+        public ItemStack getTabIconItem() {
+            return new ItemStack(ModItems.STONE_PIECE);
+        } //should be final icon
+
+    });
     public ItemBase(String itemName) {
         setUnlocalizedName(itemName);
         setRegistryName(itemName);
-        setCreativeTab(CreativeTabs.MATERIALS); // temproary item location
+        setCreativeTab(tabTimsResorces);
 
         ModItems.ITEMS.add(this);
     }
