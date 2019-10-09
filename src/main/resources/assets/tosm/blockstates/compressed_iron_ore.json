@@ -1,5 +1,5 @@
 {
   "variants": {
-    "normal": {"modle": "tosm:compressed_iron_ore"}
+    "normal": {"modle": "tosm:block/compressed_iron_ore"}
   }
 }
