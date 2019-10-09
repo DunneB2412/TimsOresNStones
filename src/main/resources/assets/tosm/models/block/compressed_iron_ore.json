@@ -1,6 +1,6 @@
 {
   "parent": "block/cube_all",
   "textures": {
-    "all": "tosm:blocks/compressed_ore_block_base"
+    "all": "tosm:blocks/compressed_ore_base"
   }
 }
