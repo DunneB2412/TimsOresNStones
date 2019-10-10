@@ -1,8 +1,0 @@
-{
-  "parent": "item/generated",
-  "textures": {
-    "layer0": "tosm:items/compressed_ore_block_base",
-    "layer1": "tosm:items/compressed_ore_block_ore_iron_temp",
-    "layer2": "tosm:items/compressed_ore_block_overlay"
-  }
-}
