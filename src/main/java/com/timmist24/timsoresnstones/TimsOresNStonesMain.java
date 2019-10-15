@@ -2,6 +2,8 @@ package com.timmist24.timsoresnstones;
 
 import com.timmist24.timsoresnstones.proxy.CommonProxy;
 import com.timmist24.timsoresnstones.util.References;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.storage.loot.LootTableList;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -34,6 +36,6 @@ public class TimsOresNStonesMain
     @EventHandler
     public void PostInit(FMLPostInitializationEvent event)
     {
-
+        LootTableList.register(new ResourceLocation("tosm", "ore_drops.json"));
     }
 }
