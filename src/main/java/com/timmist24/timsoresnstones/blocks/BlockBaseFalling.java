@@ -17,8 +17,8 @@ public class BlockBaseFalling extends BlockFalling implements IHasModel {
         setUnlocalizedName(blockName);
         setRegistryName(blockName);
         setCreativeTab(BlockBase.tabTimsBlocks);
-        setHardness(1);
-        setResistance(1);
+        setHardness((float) 1.5);
+        //setResistance(1);
         this.blockSoundType = SoundType.GROUND;
 
         ModBlocks.BLOCKS.add(this);

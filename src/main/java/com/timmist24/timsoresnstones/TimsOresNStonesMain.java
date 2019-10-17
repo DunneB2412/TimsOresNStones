@@ -1,6 +1,8 @@
 package com.timmist24.timsoresnstones;
 
+import com.timmist24.timsoresnstones.init.ModItems;
 import com.timmist24.timsoresnstones.proxy.CommonProxy;
+import com.timmist24.timsoresnstones.util.DataRetrival;
 import com.timmist24.timsoresnstones.util.References;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.storage.loot.LootTableList;
@@ -24,8 +26,12 @@ public class TimsOresNStonesMain
     @EventHandler
     public void preInit(FMLPreInitializationEvent event)
     {
+        DataRetrival.outputsInit();
+        ModItems.initWrite();
+        DataRetrival.outputsClose();
         logger = event.getModLog();
     }
+
 
     @EventHandler
     public void init(FMLInitializationEvent event)
