@@ -18,7 +18,7 @@ import org.apache.logging.log4j.Logger;
 public class TimsOresNStonesMain
 {
     private static Boolean dataWorks = DataRetrival.outputsInit();
-    private static ModItems modItems = new ModItems(dataWorks);
+    public static ModItems modItems = new ModItems(dataWorks);
     private static Boolean dataSaves = DataRetrival.outputsClose();
 
     private static Logger logger;
@@ -29,7 +29,7 @@ public class TimsOresNStonesMain
     @EventHandler
     public void preInit(FMLPreInitializationEvent event)
     {
-        DataRetrival.outputsClose();
+        modItems.setCreativeTab(modItems.TAB_TIMS_RESORCES);
         logger = event.getModLog();
     }
 

@@ -3,26 +3,40 @@ package com.timmist24.timsoresnstones.init;
 import com.timmist24.timsoresnstones.items.*;
 import com.timmist24.timsoresnstones.util.DataRetrival;
 import com.timmist24.timsoresnstones.util.References;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ModItems {
+    public final Item STONE_PIECE;
+    public final CreativeTabs TAB_TIMS_RESORCES;
+
     public static final List<Item> ITEMS = new ArrayList<>();
-    public static final Item STONE_PIECE = new ItemStonePiece("stone_piece");
 
     public ModItems(Boolean write){
+        STONE_PIECE = new ItemStonePiece("stone_piece");
+
+        TAB_TIMS_RESORCES = new CreativeTabs("tabTimsItems") {
+            @Override
+            public ItemStack getTabIconItem() {
+                return new ItemStack(STONE_PIECE);
+            }
+        };
         if ((write)) {
             initWrite();
         } else {
             init();
         }
     }
-
-
-
+    public void setCreativeTab(CreativeTabs newCreativeTab){
+        for(Item item: ITEMS){
+            item.setCreativeTab(newCreativeTab);
+        }
+    }
 
     public static void initWrite() {
         try {
