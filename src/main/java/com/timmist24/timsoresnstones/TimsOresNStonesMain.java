@@ -17,6 +17,9 @@ import org.apache.logging.log4j.Logger;
 @Mod(modid = References.MODID, name = References.NAME, version = References.VERSION, acceptedMinecraftVersions = References.ACCEPTED_VERSIONS)
 public class TimsOresNStonesMain
 {
+    private static Boolean dataWorks = DataRetrival.outputsInit();
+    private static ModItems modItems = new ModItems(dataWorks);
+    private static Boolean dataSaves = DataRetrival.outputsClose();
 
     private static Logger logger;
 
@@ -26,8 +29,6 @@ public class TimsOresNStonesMain
     @EventHandler
     public void preInit(FMLPreInitializationEvent event)
     {
-        DataRetrival.outputsInit();
-        ModItems.initWrite();
         DataRetrival.outputsClose();
         logger = event.getModLog();
     }

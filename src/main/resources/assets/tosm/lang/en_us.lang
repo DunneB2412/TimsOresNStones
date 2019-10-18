@@ -1,4 +1,5 @@
-//Mineral Itemsitem.iron_ore_piece.name=Iron Ore Piece
+//Mineral Items
+item.iron_ore_piece.name=Iron Ore Piece
 item.iron_compressed_ore_piece.name=Iron Compressed Ore Piece
 item.iron_pulverised_ore.name=Iron Pulverised ore
 item.gold_ore_piece.name=Gold Ore Piece

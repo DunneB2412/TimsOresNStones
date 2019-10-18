@@ -11,9 +11,17 @@ import java.util.List;
 
 public class ModItems {
     public static final List<Item> ITEMS = new ArrayList<>();
-
-
     public static final Item STONE_PIECE = new ItemStonePiece("stone_piece");
+
+    public ModItems(Boolean write){
+        if ((write)) {
+            initWrite();
+        } else {
+            init();
+        }
+    }
+
+
 
 
     public static void initWrite() {
@@ -31,7 +39,7 @@ public class ModItems {
             System.out.println("yeet");
 
         } catch (IOException e) {
-            //init();
+            init();
         }
 
     }
