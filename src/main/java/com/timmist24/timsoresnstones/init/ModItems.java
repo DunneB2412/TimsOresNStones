@@ -17,7 +17,15 @@ public class ModItems {
 
     public static final List<Item> ITEMS = new ArrayList<>();
 
-    public ModItems(Boolean write){
+    public ModItems(){
+        try {
+            DataRetrival.langOut.write("#Mineral Items");
+            DataRetrival.langOut.newLine();
+            DataRetrival.langOut.write("itemGroup.tabTimsBlocks=Tim's blocks");
+            DataRetrival.langOut.newLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         STONE_PIECE = new ItemStonePiece("stone_piece");
 
         TAB_TIMS_RESORCES = new CreativeTabs("tabTimsItems") {
@@ -26,43 +34,21 @@ public class ModItems {
                 return new ItemStack(STONE_PIECE);
             }
         };
-        if ((write)) {
-            initWrite();
-        } else {
-            init();
-        }
-    }
-    public void setCreativeTab(CreativeTabs newCreativeTab){
-        for(Item item: ITEMS){
-            item.setCreativeTab(newCreativeTab);
-        }
-    }
-
-    public static void initWrite() {
-        try {
-            DataRetrival.langOut.write("//Mineral Items");
-            DataRetrival.langOut.newLine();
-            for (String title : References.METALS_TITALS) {
-                for (String subTitle : References.METALS_EXTRAS) {
-                    String newItemId = DataRetrival.getId(new String[]{title, subTitle});
-                    DataRetrival.langOut.write("item." + newItemId + ".name=" + title + " " + subTitle);
-                    DataRetrival.langOut.newLine();
-                    new ItemBase(newItemId);
-                }
-            }
-            System.out.println("yeet");
-
-        } catch (IOException e) {
-            init();
-        }
-
+        init();
     }
     public static void init() {
         for (String title : References.METALS_TITALS) {
             for (String subTitle : References.METALS_EXTRAS) {
-                String newItemId = DataRetrival.getId(new String[]{title, subTitle});
+                String newItemId = DataRetrival.stringArrayToId(new String[]{title, subTitle});
                 new ItemBase(newItemId);
             }
+        }
+    }
+
+
+    public void setCreativeTab(CreativeTabs newCreativeTab){
+        for(Item item: ITEMS){
+            item.setCreativeTab(newCreativeTab);
         }
     }
 }

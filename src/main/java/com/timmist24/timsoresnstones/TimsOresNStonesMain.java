@@ -17,8 +17,8 @@ import org.apache.logging.log4j.Logger;
 @Mod(modid = References.MODID, name = References.NAME, version = References.VERSION, acceptedMinecraftVersions = References.ACCEPTED_VERSIONS)
 public class TimsOresNStonesMain
 {
-    private static Boolean dataWorks = DataRetrival.outputsInit();
-    public static ModItems modItems = new ModItems(dataWorks);
+    private static final Boolean DATAWORKS = DataRetrival.outputsInit();
+    public static ModItems modItems = new ModItems();
     private static Boolean dataSaves = DataRetrival.outputsClose();
 
     private static Logger logger;

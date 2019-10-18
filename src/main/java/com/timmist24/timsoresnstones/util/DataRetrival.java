@@ -32,12 +32,18 @@ public class DataRetrival {
         }
     }
 
-    public static String getId(String[] components){
+    public static String stringArrayToId(String[] components){
         StringBuilder out = new StringBuilder();
         for(String part: components){
             out.append(part.toLowerCase().replaceAll("\\s", "_")).append("_");
         }
         out.deleteCharAt(out.length()-1);
+        return out.toString();
+    }
+    public static String idToEnglishName(String idIn){
+        StringBuilder out = new StringBuilder(idIn.replaceAll("_", " "));
+        out.delete(0, 5);
+        out.replace(0,1, (out.charAt(0)+"").toUpperCase());
         return out.toString();
     }
 }

@@ -2,9 +2,12 @@ package com.timmist24.timsoresnstones.items;
 
 import com.timmist24.timsoresnstones.TimsOresNStonesMain;
 import com.timmist24.timsoresnstones.init.ModItems;
+import com.timmist24.timsoresnstones.util.DataRetrival;
 import com.timmist24.timsoresnstones.util.IHasModel;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+
+import java.io.IOException;
 
 public class ItemBase extends Item implements IHasModel {
     public ItemBase(String itemName) {
@@ -12,7 +15,18 @@ public class ItemBase extends Item implements IHasModel {
         setRegistryName(itemName);
         setCreativeTab(CreativeTabs.MATERIALS); //default
 
-        ModItems.ITEMS.add(this);
+        boolean langAdded = writetoLanguage();
+
+        if(langAdded)ModItems.ITEMS.add(this);
+    }
+    private boolean writetoLanguage(){
+        try {
+            DataRetrival.langOut.write(this.getUnlocalizedName() + ".name=" +DataRetrival.idToEnglishName(this.getUnlocalizedName()));
+            DataRetrival.langOut.newLine();
+            return true;
+        } catch (IOException e) {
+            return false;
+        }
     }
     @Override
     public void registerModels()
