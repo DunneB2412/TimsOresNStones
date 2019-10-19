@@ -12,7 +12,7 @@ public class DataRetrival {
     public static BufferedWriter langOut = null;
     public static boolean outputsInit() {
         try {
-            File lang = new File(NESTING_DIRECTORY_PATH, "resources\\assets\\tosm\\lang\\en_us.lang");
+            File lang = new File(NESTING_DIRECTORY_PATH, "resources\\assets\\tons\\lang\\en_us.lang");
             if (lang.exists()) lang.delete();
             langOut = new BufferedWriter(new FileWriter(lang.toString()));
             return true;
