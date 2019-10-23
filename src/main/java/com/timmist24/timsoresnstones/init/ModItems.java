@@ -1,6 +1,7 @@
 package com.timmist24.timsoresnstones.init;
 
 import com.timmist24.timsoresnstones.items.*;
+import com.timmist24.timsoresnstones.items.ItemStonePiece;
 import com.timmist24.timsoresnstones.util.DataRetrival;
 import com.timmist24.timsoresnstones.util.References;
 import net.minecraft.creativetab.CreativeTabs;
@@ -12,6 +13,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ModItems {
+    //public static final Item.ToolMaterial TOOL_MATERIAL_NONE = EnumHelper.addToolMaterial();
+
+
+
     public final Item STONE_PIECE;
     public final CreativeTabs TAB_TIMS_RESORCES;
 

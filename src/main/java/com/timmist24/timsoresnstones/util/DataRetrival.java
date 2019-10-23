@@ -5,8 +5,11 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Random;
 
 public class DataRetrival {
+    public static final Random RANDOM = new Random();
+
     private static final String NESTING_DIRECTORY_PATH= System.getProperty("user.dir").substring(0,System.getProperty("user.dir").lastIndexOf(File.separator))+"\\src\\main";
 
     public static BufferedWriter langOut = null;
@@ -31,6 +34,20 @@ public class DataRetrival {
             return false;
         }
     }
+
+    public boolean writetoLanguage(String langEntry){
+        try {
+            DataRetrival.langOut.write(langEntry);
+            DataRetrival.langOut.newLine();
+            return true;
+        } catch (IOException e) {
+            return false;
+        }
+    }
+
+
+
+
 
     public static String stringArrayToId(String[] components){
         StringBuilder out = new StringBuilder();

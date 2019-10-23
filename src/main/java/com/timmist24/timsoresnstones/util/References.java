@@ -1,5 +1,8 @@
 package com.timmist24.timsoresnstones.util;
 
+import com.timmist24.timsoresnstones.items.ItemBase;
+import net.minecraft.item.Item;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
