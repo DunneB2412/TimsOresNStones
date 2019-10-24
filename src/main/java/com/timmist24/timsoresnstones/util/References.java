@@ -1,8 +1,5 @@
 package com.timmist24.timsoresnstones.util;
 
-import com.timmist24.timsoresnstones.items.ItemBase;
-import net.minecraft.item.Item;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -22,4 +19,9 @@ public class References {
     public static final List<String> GEMS_TITALS = new ArrayList<String>(Arrays.asList("Cupronickel", "Constantan", "Ruby", "Sapphire", "Peridot", "Diamond", "Emerald"));
     public static final List<String> GEMS_EXTRAS = new ArrayList<String>(Arrays.asList("raw", "unpure", "cut", "gem"));
     public static final List<String> MINERAL_BLOCKS = new ArrayList<>(Arrays.asList("block", "Block OF Ore Pieces"));
+
+    public static final int MB_IN_TINY_DUST = 2;
+    public static final int MB_SMALL_DUST = 16;
+    public static final int MB_IN_DUST_OR_INGOT = 144;
+    public static final int MAZIMUM_MINERAL = (MB_IN_DUST_OR_INGOT/2)*3;
 }

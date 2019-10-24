@@ -1,7 +1,6 @@
 package com.timmist24.timsoresnstones.init;
 
 import com.timmist24.timsoresnstones.items.*;
-import com.timmist24.timsoresnstones.items.ItemStonePiece;
 import com.timmist24.timsoresnstones.util.DataRetrival;
 import com.timmist24.timsoresnstones.util.References;
 import net.minecraft.creativetab.CreativeTabs;
@@ -31,7 +30,7 @@ public class ModItems {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        STONE_PIECE = new ItemStonePiece("stone_piece");
+        STONE_PIECE = new ItemTons("stone_piece");
 
         TAB_TIMS_RESORCES = new CreativeTabs("tabTimsItems") {
             @Override
@@ -45,7 +44,7 @@ public class ModItems {
         for (String title : References.METALS_TITALS) {
             for (String subTitle : References.METALS_EXTRAS) {
                 String newItemId = DataRetrival.stringArrayToId(new String[]{title, subTitle});
-                new ItemBase(newItemId);
+                new ItemTons(newItemId);
             }
         }
     }

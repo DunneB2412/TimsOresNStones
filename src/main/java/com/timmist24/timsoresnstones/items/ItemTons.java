@@ -9,8 +9,9 @@ import net.minecraft.item.Item;
 
 import java.io.IOException;
 
-public class ItemBase extends Item implements IHasModel {
-    public ItemBase(String itemName) {
+public class ItemTons extends Item implements IHasModel {
+
+    public ItemTons(String itemName) {
         setUnlocalizedName(itemName);
         setRegistryName(itemName);
         setCreativeTab(CreativeTabs.MATERIALS); //default
@@ -31,6 +32,6 @@ public class ItemBase extends Item implements IHasModel {
     @Override
     public void registerModels()
     {
-        TimsOresNStonesMain.proxy.registorItemRenderer(this, 0, "inventory");
+        TimsOresNStonesMain.proxy.registorItemRenderer(this, 0, "inventory", getUnlocalizedName());
     }
 }
