@@ -26,6 +26,6 @@ public class BlockBaseFalling extends BlockFalling implements IHasModel {
     }
 
     public void registerModels() {
-        TimsOresNStonesMain.proxy.registorItemRenderer(Item.getItemFromBlock(this),0, "normal");
+        TimsOresNStonesMain.proxy.registorItemRenderer(Item.getItemFromBlock(this),0, "normal", Item.getItemFromBlock(this).getUnlocalizedName());
     }
 }

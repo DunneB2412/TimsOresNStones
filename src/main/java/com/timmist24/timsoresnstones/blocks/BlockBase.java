@@ -33,6 +33,7 @@ public class BlockBase extends Block implements IHasModel {
 
     @Override
     public void registerModels() {
-        TimsOresNStonesMain.proxy.registorItemRenderer(Item.getItemFromBlock(this),0, "normal");
+        Item item = Item.getItemFromBlock(this);
+        TimsOresNStonesMain.proxy.registorItemRenderer(item,0, "normal",item.getUnlocalizedName());
     }
 }
