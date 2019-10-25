@@ -1,8 +1,8 @@
 package com.timmist24.timsoresnstones.init.recipies;
 
-import com.timmist24.timsoresnstones.items.materials.ore.ItemTonsWithMinerals;
+import com.timmist24.timsoresnstones.items.materials.ore.ItemTosmWithMinerals;
 import net.minecraft.item.Item;
 
 public interface Filtration {
-    Item[] filter(ItemTonsWithMinerals itemIn, Float strength);
+    Item[] filter(ItemTosmWithMinerals itemIn, Float strength);
 }

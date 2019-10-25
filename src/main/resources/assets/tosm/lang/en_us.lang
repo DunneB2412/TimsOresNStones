@@ -1,0 +1,12 @@
+
+#creative tabs
+itemGroup.tims_blocks=Tim's blocks
+itemGroup.tims_items=Tim's resorces
+
+#Items
+item.stone_piece.name=Stone piece
+item.iron_ore_piece.name=Iron ore piece
+item.gold_ore_piece.name=Gold ore piece
+
+
+#blocks

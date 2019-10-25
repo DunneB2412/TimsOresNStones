@@ -1,9 +1,0 @@
-{
-  "parent": "item/generated",
-  "textures": {
-    "layer0": "tons:items/stone_piece",
-    "layer1": "tons:items/darker_stone",
-    "layer2": "tons:items/ore_iron_temp",
-    "layer3": "tons:items/ore_overlay"
-  }
-}

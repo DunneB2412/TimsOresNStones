@@ -1,8 +1,0 @@
-#Mineral Items
-item.stone_piece.name=Stone piece
-item.iron_ore_piece.name=Iron ore piece
-item.iron_compressed_ore_piece.name=Iron compressed ore piece
-item.iron_pulverised_ore.name=Iron pulverised ore
-item.gold_ore_piece.name=Gold ore piece
-item.gold_compressed_ore_piece.name=Gold compressed ore piece
-item.gold_pulverised_ore.name=Gold pulverised ore

@@ -1,19 +1,20 @@
 package com.timmist24.timsoresnstones.items.materials.ore;
 
 import com.timmist24.timsoresnstones.texturing.Color;
-import com.timmist24.timsoresnstones.util.DataRetrival;
+
+import java.util.Random;
 
 public class Mineral {
-    private static final Color DEFAULT_COLOR = new Color("b7410e"); // looks like iron
+    static final Random RANDOM = new Random();
     private static final int DEFAULT_RANDOM_LIM = 45;
     public final String title;
-    protected final boolean isOilSoluble;
-    protected float weightPerUnit;
+    final boolean isOilSoluble;
+    float weightPerUnit;
     private int quantity; // 1 = 1 tiny
     public final Color color;
 
     public Mineral(String title, boolean isOilSoluble, float weightPerUnit, Color color) {
-        this(title, isOilSoluble, weightPerUnit, color, DataRetrival.RANDOM.nextInt(DEFAULT_RANDOM_LIM));
+        this(title, isOilSoluble, weightPerUnit, color, RANDOM.nextInt(DEFAULT_RANDOM_LIM));
     }
     public Mineral(String title, boolean isOilSoluble, float weightPerUnit, Color color, int quantity){
         this.title = title;

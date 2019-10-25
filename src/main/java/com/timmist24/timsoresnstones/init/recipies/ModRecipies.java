@@ -1,11 +1,10 @@
 package com.timmist24.timsoresnstones.init.recipies;
 
-import com.timmist24.timsoresnstones.items.materials.ore.ItemTonsWithMinerals;
-import com.timmist24.timsoresnstones.items.materials.ore.Mineral;
+import com.timmist24.timsoresnstones.items.materials.ore.ItemTosmWithMinerals;
 import net.minecraft.item.Item;
 
 public class ModRecipies {
-    private static Item[] filter(ItemTonsWithMinerals itemin, float power, FiltrationMethods filtrationMethod){
+    private static Item[] filter(ItemTosmWithMinerals itemin, float power, FiltrationMethods filtrationMethod){
         return filtrationMethod.getFunction().filter(itemin, power);
     }
     public static void init(){

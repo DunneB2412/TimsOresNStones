@@ -1,14 +1,14 @@
 [
 {
-  "modid": "tons",
-  "name": "Tims ores and stones",
+  "modid": "tosm",
+  "name": "Tims ores and stones mod",
   "description": "Get them stone pieces",
   "version": "1.12.2-0.0",
   "mcversion": "1.12.2",
   "url": "",
   "updateUrl": "",
   "authorList": ["timist24"],
-  "credits": "some stuff",
+  "credits": "Timmist24: that's me, Mp3dsl, WanionCane: roe early testing and help when i got stuck ",
   "logoFile": "",
   "screenshots": [],
   "dependencies": []

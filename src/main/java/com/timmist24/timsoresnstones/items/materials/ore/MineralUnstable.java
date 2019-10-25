@@ -1,7 +1,6 @@
 package com.timmist24.timsoresnstones.items.materials.ore;
 
 import com.timmist24.timsoresnstones.texturing.Color;
-import com.timmist24.timsoresnstones.util.DataRetrival;
 
 /**
  * distabalised redstone, ect
@@ -19,15 +18,15 @@ public class MineralUnstable extends Mineral {
     }
     @Override
     public boolean isOilSoluble(){
-        if(DataRetrival.RANDOM.nextInt(unstability)>10) {
-            return DataRetrival.RANDOM.nextBoolean();
+        if(RANDOM.nextInt(unstability)>10) {
+            return RANDOM.nextBoolean();
         }
         return this.isOilSoluble;
     }
     @Override
     public float getWeightPerUnit(){
-        float randomChange = DataRetrival.RANDOM.nextInt(unstability)/3.0f;
-        if(DataRetrival.RANDOM.nextBoolean()) {
+        float randomChange = RANDOM.nextInt(unstability)/3.0f;
+        if(RANDOM.nextBoolean()) {
             return this.weightPerUnit+randomChange;
         }
         return  this.weightPerUnit-randomChange;
