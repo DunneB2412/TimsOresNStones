@@ -1,0 +1,38 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "builtin/generated",
+    "transform": "forge:default-item"
+  },
+  "variants": {
+    "type": {
+      "piece": {
+        "textures": {
+          "layer0": "tosm:items/ore_base",
+          "layer1": "tosm:items/ore_overlay"
+        }
+      },
+      "chunk": {
+        "textures": {
+          "layer0": "tosm:items/stone_piece"
+        }
+      },
+      "dust": {
+        "textures": {
+          "layer0": "tosm:items/dust_base"
+        }
+      },
+      "oily_ball": {
+        "textures": {
+          "layer0": "tosm:items/oily_ore_base",
+          "layer1": "tosm:items/oily_ore_overlay"
+        }
+      },
+      "wet_ball": {
+        "textures": {
+          "layer0": "tosm:items/wet_ore_base"
+        }
+      }
+    }
+  }
+}

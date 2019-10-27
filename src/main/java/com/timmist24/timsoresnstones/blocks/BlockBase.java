@@ -13,7 +13,7 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
 public class BlockBase extends Block implements IHasModel {
-    static final CreativeTabs tabTimsBlocks = (new CreativeTabs("tabTimsResorces") {
+    static final CreativeTabs tabTimsBlocks = (new CreativeTabs("tims_blocks") {
 
         public ItemStack getTabIconItem() {
             return new ItemStack(Item.getItemFromBlock(ModBlocks.COMPRESSED_IRON_ORE));
@@ -34,6 +34,6 @@ public class BlockBase extends Block implements IHasModel {
     @Override
     public void registerModels() {
         Item item = Item.getItemFromBlock(this);
-        TimsOresNStonesMain.proxy.registorItemRenderer(item,0, "normal",item.getUnlocalizedName());
+        TimsOresNStonesMain.proxy.registorItemRenderer(item,0, "normal",item.getRegistryName());
     }
 }

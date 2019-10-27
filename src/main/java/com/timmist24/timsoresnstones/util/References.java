@@ -5,8 +5,8 @@ import com.timmist24.timsoresnstones.texturing.Color;
 import java.io.File;
 
 public class References {
-    public static final String MODID = "tons";
-    public static final String  NAME = "Tim's ores and stones";
+    public static final String MODID = "tosm";
+    public static final String  NAME = "Tim's ore n stone mod";
     public static final String VERSION = "1.12.2-0.0";
     public static final String ACCEPTED_VERSIONS = "[1.12.2]";
     public static final String CLIENT_PROXY_CLASS = "com.timmist24.timsoresnstones.proxy.ClientProxy";

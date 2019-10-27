@@ -1,8 +1,7 @@
 package com.timmist24.timsoresnstones.init.recipies;
 
 import com.timmist24.timsoresnstones.items.materials.ore.Mineral;
-import com.timmist24.timsoresnstones.items.materials.ore.OreOil;
-import com.timmist24.timsoresnstones.items.materials.ore.OreSlury;
+import com.timmist24.timsoresnstones.items.materials.ore.OrePiece;
 import net.minecraft.item.Item;
 
 import java.util.ArrayList;
@@ -25,8 +24,8 @@ public  enum FiltrationMethods {
                 waterDesolved.add(extracted);
             }
         }
-        OreOil oreOil = new OreOil("ore_oil"+oilDesolved, (Mineral[])oilDesolved.toArray());
-        OreSlury oreSlury = new OreSlury("slury"+waterDesolved, (Mineral[])waterDesolved.toArray());
+        OrePiece oreOil = new OrePiece("ore_oil"+oilDesolved, (Mineral[])oilDesolved.toArray());
+        OrePiece oreSlury = new OrePiece("slury"+waterDesolved, (Mineral[])waterDesolved.toArray());
         return new Item[]{itemIn, oreOil, oreSlury};
     }),
     CENTERFUGIC((itemIn, strength) -> new Item[0]),
@@ -34,7 +33,7 @@ public  enum FiltrationMethods {
         Item[] out = new Item[itemIn.composition.length];
         for (int index = 0; index<itemIn.composition.length; index++){
             Mineral mineral = itemIn.composition[index];
-            out[index] = new OreSlury(mineral.title+"_ore_slury", new Mineral[]{mineral.extractMaterial(100+strength)});
+            out[index] = new OrePiece(mineral.title+"_ore_piece", new Mineral[]{mineral.extractMaterial(100+strength)});
         }
         return out;
     });
