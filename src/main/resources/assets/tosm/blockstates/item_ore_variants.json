@@ -6,29 +6,29 @@
   },
   "variants": {
     "type": {
-      "piece": {
+      "ore_piece": {
         "textures": {
-          "layer0": "tosm:items/ore_base",
-          "layer1": "tosm:items/ore_overlay"
+          "layer0": "tosm:items/ore_base2",
+          "layer1": "tosm:items/ore_overlay2"
         }
       },
-      "chunk": {
+      "ore_chunk": {
         "textures": {
-          "layer0": "tosm:items/stone_piece"
+          "layer0": "tosm:items/stone_chunk"
         }
       },
-      "dust": {
+      "ore_dust": {
         "textures": {
-          "layer0": "tosm:items/dust_base"
+          "layer0": "tosm:items/ore_dust_base"
         }
       },
-      "oily_ball": {
+      "ore_oily_ball": {
         "textures": {
           "layer0": "tosm:items/oily_ore_base",
           "layer1": "tosm:items/oily_ore_overlay"
         }
       },
-      "wet_ball": {
+      "ore_wet_ball": {
         "textures": {
           "layer0": "tosm:items/wet_ore_base"
         }

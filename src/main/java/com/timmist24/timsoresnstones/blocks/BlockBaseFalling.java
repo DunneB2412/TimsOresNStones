@@ -22,7 +22,8 @@ public class BlockBaseFalling extends BlockFalling implements IHasModel {
         this.blockSoundType = SoundType.GROUND;
 
         ModBlocks.BLOCKS.add(this);
-        ModItems.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
+        //ModItems.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
+
     }
 
     public void registerModels() {

@@ -24,16 +24,16 @@ public  enum FiltrationMethods {
                 waterDesolved.add(extracted);
             }
         }
-        OrePiece oreOil = new OrePiece("ore_oil"+oilDesolved, (Mineral[])oilDesolved.toArray());
-        OrePiece oreSlury = new OrePiece("slury"+waterDesolved, (Mineral[])waterDesolved.toArray());
-        return new Item[]{itemIn, oreOil, oreSlury};
+        //OrePiece oreOil = new OrePiece("ore_oil"+oilDesolved, (Mineral[])oilDesolved.toArray());
+        //OrePiece oreSlury = new OrePiece("slury"+waterDesolved, (Mineral[])waterDesolved.toArray());
+        return new Item[0]; //{itemIn, oreOil, oreSlury};
     }),
     CENTERFUGIC((itemIn, strength) -> new Item[0]),
     MAGIC((itemIn, strength) -> {
         Item[] out = new Item[itemIn.composition.length];
         for (int index = 0; index<itemIn.composition.length; index++){
             Mineral mineral = itemIn.composition[index];
-            out[index] = new OrePiece(mineral.title+"_ore_piece", new Mineral[]{mineral.extractMaterial(100+strength)});
+            //out[index] = new OrePiece(mineral.title+"_ore_piece", new Mineral[]{mineral.extractMaterial(100+strength)});
         }
         return out;
     });

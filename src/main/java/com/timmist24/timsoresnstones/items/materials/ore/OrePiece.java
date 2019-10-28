@@ -1,23 +1,22 @@
 package com.timmist24.timsoresnstones.items.materials.ore;
 
-import com.timmist24.timsoresnstones.TimsOresNStonesMain;
-import com.timmist24.timsoresnstones.items.materials.ItemTosmWithMinerals;
-import net.minecraft.util.ResourceLocation;
+import com.timmist24.timsoresnstones.items.ItemTosmWithVariants;
+import com.timmist24.timsoresnstones.texturing.Color;
+import com.timmist24.timsoresnstones.util.References;
 
-public class OrePiece extends ItemTosmWithMinerals {
-
-    public OrePiece(String itemName, Mineral[] composition) {
-        super(itemName, composition, OrePieceStates.size());
-        this.setHasSubtypes(true);
+public class OrePiece extends ItemTosmWithVariants {
+    private static final int MAX_COMPOSITION = References.MAZIMUM_MINERAL;
+    public Mineral[] composition;
+    public OrePiece(String itemName) {
+        super(itemName, OrePieceVariants.values());
+        updateColor();
     }
-    @Override
-    public void registerModels()
-    {
-        for(OrePieceStates state: OrePieceStates.values()) {
-            ResourceLocation resourceLocation= new ResourceLocation("tosm","item_ore_variants");
-            TimsOresNStonesMain.proxy.registorItemRenderer(this, state.getMeta(), "type="+state.toString(), resourceLocation);
-        }
 
+    private void updateColor(){
+        Color newColor = new Color("00000000");
+        for (Mineral mineral: composition){
+            newColor = Color.combine(mineral.color, newColor, (float)mineral.getQuantity()/MAX_COMPOSITION);
+        }
     }
     
     public String getItemStackDisplayName(ItemStack stack)

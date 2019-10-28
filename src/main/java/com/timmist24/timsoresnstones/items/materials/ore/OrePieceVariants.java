@@ -1,6 +1,6 @@
 package com.timmist24.timsoresnstones.items.materials.ore;
 
-public enum OrePieceStates {
+public enum OrePieceVariants {
     PIECE(0),
     CHUNK(1),
     DUST(2),
@@ -8,12 +8,8 @@ public enum OrePieceStates {
     WET_BALL(4);
 
     private final int meta;
-    OrePieceStates(int meta) {
+    OrePieceVariants(int meta) {
         this.meta = meta;
-    }
-
-    public static int size() {
-        return 5;
     }
 
     public final int getMeta(){
@@ -24,15 +20,15 @@ public enum OrePieceStates {
     public String toString() {
         switch (this){
             case PIECE:
-                return "piece";
+                return "ore_piece";
             case CHUNK:
-                return "chunk";
+                return "ore_chunk";
             case DUST:
-                return "dust";
+                return "ore_dust";
             case OILY_BALL:
-                return "oily_ball";
+                return "ore_oily_ball";
             case WET_BALL:
-                return "wet_ball";
+                return "ore_wet_ball";
         }
         return "";
     }
