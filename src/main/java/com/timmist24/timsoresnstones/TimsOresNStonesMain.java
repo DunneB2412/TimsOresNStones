@@ -1,5 +1,8 @@
 package com.timmist24.timsoresnstones;
 
+import com.timmist24.timsoresnstones.init.ModBlocks;
+import com.timmist24.timsoresnstones.init.ModCreativeTabs;
+import com.timmist24.timsoresnstones.init.ModItems;
 import com.timmist24.timsoresnstones.proxy.CommonProxy;
 import com.timmist24.timsoresnstones.util.References;
 import net.minecraft.client.Minecraft;
@@ -17,6 +20,7 @@ import org.apache.logging.log4j.Logger;
 @Mod(modid = References.MODID, name = References.NAME, version = References.VERSION, acceptedMinecraftVersions = References.ACCEPTED_VERSIONS)
 public class TimsOresNStonesMain
 {
+    public static final ModCreativeTabs CREATIVE_TABS = new ModCreativeTabs();
     private static Logger logger;
 
     @SidedProxy(clientSide = References.CLIENT_PROXY_CLASS, serverSide = References.COMMON_PROXY_CLASS)
@@ -32,7 +36,7 @@ public class TimsOresNStonesMain
     @EventHandler
     public void init(FMLInitializationEvent event)
     {
-
+        CREATIVE_TABS.updateIcone(ModItems.STONE_PIECE, ModBlocks.COMPRESSED_IRON_ORE);
     }
 
     @EventHandler

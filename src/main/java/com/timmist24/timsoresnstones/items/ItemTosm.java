@@ -10,18 +10,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class ItemTosm extends Item implements IHasModel {
-
-//    private static final CreativeTabs TAB_TIMS_RESORCES = new CreativeTabs("tims_items") {
-//        @Override
-//        public ItemStack getTabIconItem() {
-//            return new ItemStack(ModItems.STONE_PIECE);
-//        }
-//    };
-
     public ItemTosm(String itemName) {
         setUnlocalizedName(itemName);
         setRegistryName(itemName);
-        //setCreativeTab(TAB_TIMS_RESORCES);
+        setCreativeTab(TimsOresNStonesMain.CREATIVE_TABS.TAB_TIMS_ITEMS);
         ModItems.ITEMS.add(this);
     }
 

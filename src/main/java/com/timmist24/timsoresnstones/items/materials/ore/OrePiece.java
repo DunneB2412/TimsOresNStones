@@ -9,7 +9,7 @@ public class OrePiece extends ItemTosmWithVariants {
     public Mineral[] composition;
     public OrePiece(String itemName) {
         super(itemName, OrePieceVariants.values());
-        updateColor();
+        //updateColor();
     }
 
     private void updateColor(){

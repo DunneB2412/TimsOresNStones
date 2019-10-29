@@ -13,18 +13,12 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
 public class BlockBase extends Block implements IHasModel {
-    static final CreativeTabs tabTimsBlocks = (new CreativeTabs("tims_blocks") {
 
-        public ItemStack getTabIconItem() {
-            return new ItemStack(Item.getItemFromBlock(ModBlocks.COMPRESSED_IRON_ORE));
-        }
-
-    });
     public BlockBase(String blockName, Material material) {
         super(material);
         setUnlocalizedName(blockName);
         setRegistryName(blockName);
-        setCreativeTab(tabTimsBlocks);
+        setCreativeTab(TimsOresNStonesMain.CREATIVE_TABS.TAB_TIMS_BLOCKS);
         this.blockSoundType = SoundType.METAL;
 
         ModBlocks.BLOCKS.add(this);

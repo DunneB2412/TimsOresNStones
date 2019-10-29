@@ -21,7 +21,7 @@ public class ModItems {
 //    }
 
 
-    //public static final Item STONE_PIECE = new ItemTosm("stone_piece");
-    //public static final Item ORE = new OrePiece("ore");
-    //public static final Item DUST = new Dust("dust");
+    public static final Item STONE_PIECE = new ItemTosm("stone_piece");
+    public static final Item ORE = new OrePiece("ore");
+    public static final Item DUST = new Dust("dust");
 }

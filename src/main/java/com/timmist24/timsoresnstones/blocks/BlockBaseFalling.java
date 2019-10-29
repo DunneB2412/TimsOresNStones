@@ -16,13 +16,13 @@ public class BlockBaseFalling extends BlockFalling implements IHasModel {
         super(material);
         setUnlocalizedName(blockName);
         setRegistryName(blockName);
-        setCreativeTab(BlockBase.tabTimsBlocks);
+        setCreativeTab(TimsOresNStonesMain.CREATIVE_TABS.TAB_TIMS_BLOCKS);
         setHarvestLevel("Shovle", 2);
         this.blockHardness = (float) 1.5;
         this.blockSoundType = SoundType.GROUND;
 
         ModBlocks.BLOCKS.add(this);
-        //ModItems.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
+        ModItems.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
 
     }
 
