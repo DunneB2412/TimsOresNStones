@@ -11,6 +11,6 @@
   "credits": "Timmist24: that's me, Mp3dsl, WanionCane: roe early testing and help when i got stuck ",
   "logoFile": "",
   "screenshots": [],
-  "dependencies": []
+  "dependencies": ["*"]
 }
 ]

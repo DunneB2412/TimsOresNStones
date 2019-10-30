@@ -7,7 +7,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import scala.Char;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -28,14 +27,9 @@ public class ModItems {
                 List<IBlockState> lise = block.getBlockState().getValidStates();
                 for(IBlockState state: lise){
                     String title = state.toString();
-                    Matcher matcher = Pattern.compile("[^0]*([A-Z][^0]+)").matcher(title);
-                    String mineralTitle;
-                    if(matcher.matches()){
-                        mineralTitle = matcher.group(1);
-                    }
-                    else {
-                        mineralTitle = title;
-                    }
+                    Matcher matcher1 = Pattern.compile(".*\\[type=(\\w+)\\]").matcher(title);
+                    Matcher matcher2 = Pattern.compile(".+:(\\w+)_ore").matcher(title);
+                    String mineralTitle = matcher1.matches()? matcher1.group(1): matcher2.matches()? matcher2.group(1): title ;
                     if(!MINERAL_TITLES.contains(mineralTitle)){
                         MINERAL_TITLES.add(mineralTitle);
                     }
@@ -44,7 +38,7 @@ public class ModItems {
         }
 
         for (String title: MINERAL_TITLES){
-            new ItemTosm("test"+title);
+            //new ItemTosm("test"+title);
         }
     }
 

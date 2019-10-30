@@ -5,6 +5,7 @@ import com.timmist24.timsoresnstones.init.ModCreativeTabs;
 import com.timmist24.timsoresnstones.init.ModItems;
 import com.timmist24.timsoresnstones.proxy.CommonProxy;
 import com.timmist24.timsoresnstones.util.References;
+import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.color.ItemColors;
 import net.minecraft.util.ResourceLocation;
@@ -15,7 +16,10 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import org.apache.logging.log4j.Logger;
+
+import java.util.Collection;
 
 @Mod(modid = References.MODID, name = References.NAME, version = References.VERSION, acceptedMinecraftVersions = References.ACCEPTED_VERSIONS)
 public class TimsOresNStonesMain
@@ -42,6 +46,7 @@ public class TimsOresNStonesMain
     @EventHandler
     public void PostInit(FMLPostInitializationEvent event)
     {
-        LootTableList.register(new ResourceLocation("tosm", "ore_drops.json"));
+        //LootTableList.register(new ResourceLocation("tosm", "ore_drops.json"));
+        Collection<Block> blocks = GameRegistry.findRegistry(Block.class).getValuesCollection();
     }
 }
