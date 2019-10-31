@@ -6,10 +6,6 @@ import com.timmist24.timsoresnstones.init.ModItems;
 import com.timmist24.timsoresnstones.proxy.CommonProxy;
 import com.timmist24.timsoresnstones.util.References;
 import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.color.ItemColors;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.storage.loot.LootTableList;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -17,15 +13,16 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.oredict.OreDictionary;
 import org.apache.logging.log4j.Logger;
 
 import java.util.Collection;
 
-@Mod(modid = References.MODID, name = References.NAME, version = References.VERSION, acceptedMinecraftVersions = References.ACCEPTED_VERSIONS)
+@Mod(modid = References.MODID, name = References.NAME, version = References.VERSION, acceptedMinecraftVersions = References.ACCEPTED_VERSIONS)//, dependencies = References.DEPENDENCIES)
 public class TimsOresNStonesMain
 {
     public static final ModCreativeTabs CREATIVE_TABS = new ModCreativeTabs();
-    private static Logger logger;
+    public static Logger logger;
 
     @SidedProxy(clientSide = References.CLIENT_PROXY_CLASS, serverSide = References.COMMON_PROXY_CLASS)
     public static CommonProxy proxy;
@@ -34,12 +31,14 @@ public class TimsOresNStonesMain
     public void preInit(FMLPreInitializationEvent event)
     {
         logger = event.getModLog();
+        logger.info("tosm strts");
     }
 
 
     @EventHandler
     public void init(FMLInitializationEvent event)
     {
+        String [] orenames = OreDictionary.getOreNames();
         CREATIVE_TABS.updateIcone(ModItems.STONE_PIECE, ModBlocks.COMPRESSED_IRON_ORE);
     }
 
@@ -48,5 +47,6 @@ public class TimsOresNStonesMain
     {
         //LootTableList.register(new ResourceLocation("tosm", "ore_drops.json"));
         Collection<Block> blocks = GameRegistry.findRegistry(Block.class).getValuesCollection();
+        String [] orenames = OreDictionary.getOreNames();
     }
 }

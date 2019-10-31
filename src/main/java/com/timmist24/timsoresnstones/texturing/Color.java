@@ -54,4 +54,8 @@ public class Color{
         double alpha = Math.sqrt((colorA.alpha*colorA.alpha*splitForA)+(colorB.alpha*colorB.alpha*splitForB));
         return new Color(red, green, blue, alpha);
     }
+    @Override
+    public String toString(){
+        return "a:"+alpha+",r:"+red+",g:"+green+",b:"+blue;
+    }
 }

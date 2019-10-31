@@ -11,8 +11,9 @@ public class References {
     public static final String ACCEPTED_VERSIONS = "[1.12.2]";
     public static final String CLIENT_PROXY_CLASS = "com.timmist24.timsoresnstones.proxy.ClientProxy";
     public static final String COMMON_PROXY_CLASS = "com.timmist24.timsoresnstones.proxy.CommonProxy";
-    public static final String NESTING_DIRECTORY_PATH= System.getProperty("user.dir").substring(0,System.getProperty("user.dir").lastIndexOf(File.separator))+"\\src\\main";
+    //public static final String DEPENDENCIES = "";
 
+    public static final String NESTING_DIRECTORY_PATH= System.getProperty("user.dir").substring(0,System.getProperty("user.dir").lastIndexOf(File.separator))+"\\src\\main";
 //    private static final String[] dusts = {"Dust", "Dust small", "Dust Tiny"};
 //    private static final String[] components = {"Ingot", "Nugget", "Gear", "Rod", "plate"};
 //    public static final List<String> METALS_TITALS = new ArrayList<String>(Arrays.asList("Iron", "Gold"));//, "Copper", "Tin", "Silver", "Lead", "Nickel", "Platinum", "Zinc", "Aluminium", "Aluminum", "Alumina", "Chromium", "Chrome", "Uranium", "Iridium", "Osmium", "Bronze", "Steel", "Brass", "Invar", "Electrum", "RefinedIron"));

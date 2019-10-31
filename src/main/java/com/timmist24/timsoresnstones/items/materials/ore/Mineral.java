@@ -4,7 +4,7 @@ import com.timmist24.timsoresnstones.texturing.Color;
 
 import java.util.Random;
 
-public class Mineral {
+public class Mineral implements Comparable<Mineral>{
     static final Random RANDOM = new Random();
     private static final int DEFAULT_RANDOM_LIM = 45;
     public final String title;
@@ -39,5 +39,21 @@ public class Mineral {
     }
     public float getNetWeight() {
         return getWeightPerUnit()*quantity;
+    }
+    @Override
+    public String toString(){
+       return "Mineral:"+title+"["+quantity+"]";
+    }
+
+    @Override
+    public int compareTo(Mineral other) {
+        return title.compareTo(other.title);
+    }
+    @Override
+    public boolean equals(Object other){
+        if(other.getClass().equals(Mineral.class)) {
+            return this.compareTo((Mineral)other) == 0;
+        }
+        return false;
     }
 }
