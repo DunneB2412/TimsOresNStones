@@ -21,11 +21,17 @@ import java.util.regex.Pattern;
 public class ModItems {
     public static final List<Item> ITEMS = new ArrayList<>();
     private static final List<Mineral> MINERAL_LIST = new ArrayList<>();
+    private static final List<String> oreDictReference = new ArrayList<>();
 
 
     //public static final Item.ToolMaterial TOOL_MATERIAL_NONE = EnumHelper.addToolMaterial();
     static {
-        //String [] orenames = OreDictionary.getOreNames();
+        String [] oreNames = OreDictionary.getOreNames();
+        for(String oreName: oreNames){
+            if(oreName.contains("ore")){
+                oreDictReference.add(oreName);
+            }
+        }
         Collection<Block> blocks = GameRegistry.findRegistry(Block.class).getValuesCollection();
         String modBeingScanned = "";
         for (Block block: blocks){
@@ -42,8 +48,8 @@ public class ModItems {
                 for (IBlockState state : list) {
                     String stateAsString = state.toString();
                     matcher1 = Pattern.compile(".*\\[type=(\\w+)\\]").matcher(stateAsString);
-                    Matcher matcher2 = Pattern.compile(".+:(\\w+)_ore").matcher(stateAsString);
-                    String mineralTitle = matcher1.matches() ? matcher1.group(1).replaceAll("_ore", "") : matcher2.matches() ? matcher2.group(1) : stateAsString;
+                    Matcher matcher2 = Pattern.compile(".+:(\\w+)").matcher(stateAsString);
+                    String mineralTitle = (matcher1.matches() ? matcher1.group(1) : matcher2.matches() ? matcher2.group(1) : stateAsString).replaceAll("_ore", "");
                     Mineral newMineral = new Mineral(mineralTitle, false, 10, new Color("000000"), 1);
                     if (!MINERAL_LIST.contains(newMineral)) {
                         MINERAL_LIST.add(newMineral);
