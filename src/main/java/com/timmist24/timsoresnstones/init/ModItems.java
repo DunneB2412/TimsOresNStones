@@ -25,15 +25,23 @@ public class ModItems {
 
     //public static final Item.ToolMaterial TOOL_MATERIAL_NONE = EnumHelper.addToolMaterial();
     static {
-        String [] orenames = OreDictionary.getOreNames();
+        //String [] orenames = OreDictionary.getOreNames();
         Collection<Block> blocks = GameRegistry.findRegistry(Block.class).getValuesCollection();
+        String modBeingScanned = "";
         for (Block block: blocks){
             String blockAsString = block.toString();
+            Matcher matcher1 = Pattern.compile("Block\\{(\\w+):.*\\}").matcher(blockAsString);
+            if(matcher1.matches()){
+                if(!matcher1.group(1).equals(modBeingScanned)){
+                    modBeingScanned = matcher1.group(1);
+                    TimsOresNStonesMain.logger.info("Searching: "+modBeingScanned+" for ore");
+                }
+            }
             if(blockAsString.contains("ore")||blockAsString.contains("resource")) {
                 List<IBlockState> list = block.getBlockState().getValidStates();
                 for (IBlockState state : list) {
                     String stateAsString = state.toString();
-                    Matcher matcher1 = Pattern.compile(".*\\[type=(\\w+)\\]").matcher(stateAsString);
+                    matcher1 = Pattern.compile(".*\\[type=(\\w+)\\]").matcher(stateAsString);
                     Matcher matcher2 = Pattern.compile(".+:(\\w+)_ore").matcher(stateAsString);
                     String mineralTitle = matcher1.matches() ? matcher1.group(1).replaceAll("_ore", "") : matcher2.matches() ? matcher2.group(1) : stateAsString;
                     Mineral newMineral = new Mineral(mineralTitle, false, 10, new Color("000000"), 1);
