@@ -6,6 +6,7 @@ import com.timmist24.timsoresnstones.init.ModItems;
 import com.timmist24.timsoresnstones.proxy.CommonProxy;
 import com.timmist24.timsoresnstones.util.References;
 import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -38,15 +39,13 @@ public class TimsOresNStonesMain
     @EventHandler
     public void init(FMLInitializationEvent event)
     {
-        String [] orenames = OreDictionary.getOreNames();
         CREATIVE_TABS.updateIcone(ModItems.STONE_PIECE, ModBlocks.COMPRESSED_IRON_ORE);
     }
 
     @EventHandler
     public void PostInit(FMLPostInitializationEvent event)
     {
+        //GameRegistry.findRegistry(Block.class).getValues().remove(2);
         //LootTableList.register(new ResourceLocation("tosm", "ore_drops.json"));
-        Collection<Block> blocks = GameRegistry.findRegistry(Block.class).getValuesCollection();
-        String [] orenames = OreDictionary.getOreNames();
     }
 }
