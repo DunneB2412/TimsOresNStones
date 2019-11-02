@@ -20,18 +20,11 @@ import java.util.regex.Pattern;
 
 public class ModItems {
     public static final List<Item> ITEMS = new ArrayList<>();
-    private static final List<Mineral> MINERAL_LIST = new ArrayList<>();
-    private static final List<String> oreDictReference = new ArrayList<>();
+    public static final List<Mineral> MINERAL_LIST = new ArrayList<>();
 
 
     //public static final Item.ToolMaterial TOOL_MATERIAL_NONE = EnumHelper.addToolMaterial();
     static {
-        String [] oreNames = OreDictionary.getOreNames();
-        for(String oreName: oreNames){
-            if(oreName.contains("ore")){
-                oreDictReference.add(oreName);
-            }
-        }
         Collection<Block> blocks = GameRegistry.findRegistry(Block.class).getValuesCollection();
         String modBeingScanned = "";
         for (Block block: blocks){
@@ -40,26 +33,35 @@ public class ModItems {
             if(matcher1.matches()){
                 if(!matcher1.group(1).equals(modBeingScanned)){
                     modBeingScanned = matcher1.group(1);
-                    TimsOresNStonesMain.logger.info("Searching: "+modBeingScanned+" for ore");
+                    TimsOresNStonesMain.logger.info("Searching: "+modBeingScanned+" for ore.");
                 }
             }
-            if(blockAsString.contains("ore")||blockAsString.contains("resource")) {
+            boolean matches = Pattern.compile("Block.*((?:(?:[^a-zA-Z]o|O)re)|(?:(?:[^a-zA-Z]r|R)esource)).*").matcher(blockAsString).matches();
+            if(matches) {
                 List<IBlockState> list = block.getBlockState().getValidStates();
+                List<String> foundMinerals = new ArrayList<>();
+                List<String> newMinerals = new ArrayList<>();
                 for (IBlockState state : list) {
                     String stateAsString = state.toString();
-                    matcher1 = Pattern.compile(".*\\[type=(\\w+)\\]").matcher(stateAsString);
-                    Matcher matcher2 = Pattern.compile(".+:(\\w+)").matcher(stateAsString);
-                    String mineralTitle = (matcher1.matches() ? matcher1.group(1) : matcher2.matches() ? matcher2.group(1) : stateAsString).replaceAll("_ore", "");
-                    Mineral newMineral = new Mineral(mineralTitle, false, 10, new Color("000000"), 1);
-                    if (!MINERAL_LIST.contains(newMineral)) {
-                        MINERAL_LIST.add(newMineral);
-                        new Dust(mineralTitle + "dust");
-                        block.getRegistryName();
+                    matches = Pattern.compile(".*((?:[^a-zA-Z]o|O)re).*").matcher(stateAsString).matches(); //ic2 did this
+                    if(matches){
+                        matcher1 = Pattern.compile(".*\\[type=(\\w+)\\]").matcher(stateAsString);
+                        Matcher matcher2 = Pattern.compile(".+:(\\w+)").matcher(stateAsString);
+                        String mineralTitle = (matcher1.matches() ? matcher1.group(1) : matcher2.matches() ? matcher2.group(1) : stateAsString).replaceAll("_ore", "");
+                        Mineral newMineral = new Mineral(mineralTitle, false, 10, new Color("000000"), 1);
+                        foundMinerals.add(mineralTitle);
+                        if (!MINERAL_LIST.contains(newMineral)) {
+                            MINERAL_LIST.add(newMineral);
+                            Item newDust = new Dust(mineralTitle + "_dust");
+                            String test = newDust.getRegistryName().toString()+" --- "+ newDust.getUnlocalizedName();
+                            newMinerals.add(mineralTitle);
+                        }
                     }
                 }
+                TimsOresNStonesMain.logger.info("Found: "+blockAsString+", containing:"+foundMinerals+" that were ores, of which:"+newMinerals+ (newMinerals.size()>1?" were":" was")+" new.");
             }
         }
-        TimsOresNStonesMain.logger.info(MINERAL_LIST);
+        TimsOresNStonesMain.logger.info("Tims instance set up with"+MINERAL_LIST+"");
     }
 
 

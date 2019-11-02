@@ -1,11 +1,9 @@
 package com.timmist24.timsoresnstones.items.materials;
 
 
-import com.timmist24.timsoresnstones.items.ItemTosmWithVariants;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.text.translation.I18n;
+import com.timmist24.timsoresnstones.items.ItemWithMinerals;
 
-public class Dust extends ItemTosmWithVariants {
+public class Dust extends ItemWithMinerals {
     public Dust(String itemName) {
         super(itemName, PureDustVariants.values());
     }

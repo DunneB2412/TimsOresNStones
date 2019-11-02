@@ -19,6 +19,7 @@ public enum OrePieceVariants {
     @Override
     public String toString() {
         switch (this){
+            //smaller piece
             case PIECE:
                 return "ore_piece";
             case CHUNK:

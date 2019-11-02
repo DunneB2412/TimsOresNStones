@@ -1,10 +1,10 @@
 package com.timmist24.timsoresnstones.items.materials.ore;
 
-import com.timmist24.timsoresnstones.items.ItemTosmWithVariants;
+import com.timmist24.timsoresnstones.items.ItemWithMinerals;
 import com.timmist24.timsoresnstones.texturing.Color;
 import com.timmist24.timsoresnstones.util.References;
 
-public class OrePiece extends ItemTosmWithVariants {
+public class OrePiece extends ItemWithMinerals {
     private static final int MAX_COMPOSITION = References.MAZIMUM_MINERAL;
     public Mineral[] composition;
     public OrePiece(String itemName) {
