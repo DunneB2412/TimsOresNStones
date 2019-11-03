@@ -9,7 +9,9 @@ import com.timmist24.timsoresnstones.texturing.Color;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.oredict.OreDictionary;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -24,6 +26,8 @@ public class ModItems {
 
     //public static final Item.ToolMaterial TOOL_MATERIAL_NONE = EnumHelper.addToolMaterial();
     static {
+        String[] orenames = OreDictionary.getOreNames();
+        List<ItemStack> stacks = OreDictionary.getOres("itemScrap");
         Collection<Block> blocks = GameRegistry.findRegistry(Block.class).getValuesCollection();
         String modBeingScanned = "";
         for (Block block: blocks){

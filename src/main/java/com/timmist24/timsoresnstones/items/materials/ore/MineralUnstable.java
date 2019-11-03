@@ -21,14 +21,14 @@ public class MineralUnstable extends Mineral {
         if(RANDOM.nextInt(unstability)>10) {
             return RANDOM.nextBoolean();
         }
-        return this.isOilSoluble;
+        return super.isOilSoluble();
     }
     @Override
     public float getWeightPerUnit(){
         float randomChange = RANDOM.nextInt(unstability)/3.0f;
         if(RANDOM.nextBoolean()) {
-            return this.weightPerUnit+randomChange;
+            return super.getWeightPerUnit()+randomChange;
         }
-        return  this.weightPerUnit-randomChange;
+        return  super.getWeightPerUnit()-randomChange;
     }
 }

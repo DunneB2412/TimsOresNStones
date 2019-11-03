@@ -7,9 +7,11 @@ import java.util.Random;
 public class Mineral implements Comparable<Mineral>{
     static final Random RANDOM = new Random();
     private static final int DEFAULT_RANDOM_LIM = 45;
+
     public final String title;
-    final boolean isOilSoluble;
-    float weightPerUnit;
+    //private final MineralVariant variant;
+    private final boolean isOilSoluble;
+    private float weightPerUnit;
     private int quantity; // 1 = 1 tiny
     public final Color color;
 
