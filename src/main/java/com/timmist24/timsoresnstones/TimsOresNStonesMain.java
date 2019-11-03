@@ -3,6 +3,7 @@ package com.timmist24.timsoresnstones;
 import com.timmist24.timsoresnstones.init.ModBlocks;
 import com.timmist24.timsoresnstones.init.ModCreativeTabs;
 import com.timmist24.timsoresnstones.init.ModItems;
+import com.timmist24.timsoresnstones.items.ItemWithMinerals;
 import com.timmist24.timsoresnstones.proxy.CommonProxy;
 import com.timmist24.timsoresnstones.util.References;
 import net.minecraft.block.Block;
@@ -45,7 +46,6 @@ public class TimsOresNStonesMain
     @EventHandler
     public void PostInit(FMLPostInitializationEvent event)
     {
-        //GameRegistry.findRegistry(Block.class).getValues().remove(2);
-        //LootTableList.register(new ResourceLocation("tosm", "ore_drops.json"));
+        ItemWithMinerals.closeWriter();
     }
 }

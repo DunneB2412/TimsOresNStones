@@ -10,7 +10,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.oredict.OreDictionary;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -52,8 +51,6 @@ public class ModItems {
                         foundMinerals.add(mineralTitle);
                         if (!MINERAL_LIST.contains(newMineral)) {
                             MINERAL_LIST.add(newMineral);
-                            Item newDust = new Dust(mineralTitle + "_dust");
-                            String test = newDust.getRegistryName().toString()+" --- "+ newDust.getUnlocalizedName();
                             newMinerals.add(mineralTitle);
                         }
                     }
