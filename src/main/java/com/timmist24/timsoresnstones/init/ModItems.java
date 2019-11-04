@@ -22,11 +22,18 @@ import java.util.regex.Pattern;
 public class ModItems {
     public static final List<Item> ITEMS = new ArrayList<>();
     public static final List<Mineral> MINERAL_LIST = new ArrayList<>();
+    private static final List<String> ORE_DICT_TITTLAL = new ArrayList<>();
 
 
     //public static final Item.ToolMaterial TOOL_MATERIAL_NONE = EnumHelper.addToolMaterial();
     static {
-        String[] orenames = OreDictionary.getOreNames();
+        String[] names = OreDictionary.getOreNames();
+        for(String name: names){
+            if(Pattern.matches("(ingot|gem|crystal)\\w*", name)){
+                ORE_DICT_TITTLAL.add(name);
+            }
+        }
+
         List<ItemStack> stacks = OreDictionary.getOres("itemScrap");
         Collection<Block> blocks = GameRegistry.findRegistry(Block.class).getValuesCollection();
         String modBeingScanned = "";
@@ -39,15 +46,13 @@ public class ModItems {
                     TimsOresNStonesMain.logger.info("Searching: "+modBeingScanned+" for ore.");
                 }
             }
-            boolean matches = Pattern.compile("Block.*((?:(?:[^a-zA-Z]o|O)re)|(?:(?:[^a-zA-Z]r|R)esource)).*").matcher(blockAsString).matches();
-            if(matches) {
+            if(Pattern.matches("Block.*((?:(?:[^a-zA-Z]o|O)re)|(?:(?:[^a-zA-Z]r|R)esource)).*", blockAsString)) {
                 List<IBlockState> list = block.getBlockState().getValidStates();
                 List<String> foundMinerals = new ArrayList<>();
                 List<String> newMinerals = new ArrayList<>();
                 for (IBlockState state : list) {
                     String stateAsString = state.toString();
-                    matches = Pattern.compile(".*((?:[^a-zA-Z]o|O)re).*").matcher(stateAsString).matches(); //ic2 did this
-                    if(matches){
+                    if(Pattern.matches(".*((?:[^a-zA-Z]o|O)re).*", stateAsString)){
                         matcher1 = Pattern.compile(".*\\[type=(\\w+)\\]").matcher(stateAsString);
                         Matcher matcher2 = Pattern.compile(".+:(\\w+)").matcher(stateAsString);
                         String mineralTitle = (matcher1.matches() ? matcher1.group(1) : matcher2.matches() ? matcher2.group(1) : stateAsString).replaceAll("_ore", "");
