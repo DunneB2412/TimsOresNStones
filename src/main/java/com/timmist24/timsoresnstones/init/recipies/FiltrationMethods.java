@@ -1,7 +1,6 @@
 package com.timmist24.timsoresnstones.init.recipies;
 
-import com.timmist24.timsoresnstones.items.materials.ore.Mineral;
-import com.timmist24.timsoresnstones.items.materials.ore.OrePiece;
+import com.timmist24.timsoresnstones.items.materials.ore.mineral.Mineral;
 import net.minecraft.item.Item;
 
 import java.util.ArrayList;
@@ -30,9 +29,9 @@ public  enum FiltrationMethods {
     }),
     CENTERFUGIC((itemIn, strength) -> new Item[0]),
     MAGIC((itemIn, strength) -> {
-        Item[] out = new Item[itemIn.composition.length];
-        for (int index = 0; index<itemIn.composition.length; index++){
-            Mineral mineral = itemIn.composition[index];
+        Item[] out = new Item[itemIn.composition.size()];
+        for (int index = 0; index<itemIn.composition.size(); index++){
+            Mineral mineral = itemIn.composition.get(index);
             //out[index] = new OrePiece(mineral.title+"_ore_piece", new Mineral[]{mineral.extractMaterial(100+strength)});
         }
         return out;

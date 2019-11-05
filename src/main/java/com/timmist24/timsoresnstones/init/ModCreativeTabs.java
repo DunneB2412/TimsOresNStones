@@ -8,8 +8,8 @@ import net.minecraft.item.ItemStack;
 public class ModCreativeTabs {
     public final CreativeTabs TAB_TIMS_ITEMS;
     public final CreativeTabs TAB_TIMS_BLOCKS;
-    private Item timsItemsIcon;// = new Item();
-    private Block timsBlocksIcon;// = new Block(Material.IRON);
+    private Item timsItemsIcon;
+    private Block timsBlocksIcon;
     public ModCreativeTabs(){
         TAB_TIMS_ITEMS = new CreativeTabs("tims_items") {
             @Override

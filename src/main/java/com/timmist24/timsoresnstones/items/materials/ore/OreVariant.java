@@ -1,6 +1,6 @@
 package com.timmist24.timsoresnstones.items.materials.ore;
 
-public enum OrePieceVariants {
+public enum OreVariant {
     PIECE(0),
     CHUNK(1),
     DUST(2),
@@ -8,7 +8,7 @@ public enum OrePieceVariants {
     WET_BALL(4);
 
     private final int meta;
-    OrePieceVariants(int meta) {
+    OreVariant(int meta) {
         this.meta = meta;
     }
 

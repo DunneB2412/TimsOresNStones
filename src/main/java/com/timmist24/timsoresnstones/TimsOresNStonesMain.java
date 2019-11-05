@@ -39,7 +39,7 @@ public class TimsOresNStonesMain
     @EventHandler
     public void init(FMLInitializationEvent event)
     {
-        CREATIVE_TABS.updateIcone(ModItems.STONE_PIECE, ModBlocks.COMPRESSED_IRON_ORE);
+        CREATIVE_TABS.updateIcone(ModItems.ORE, ModBlocks.COMPRESSED_IRON_ORE);
     }
 
     @EventHandler

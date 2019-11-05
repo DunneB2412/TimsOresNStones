@@ -8,6 +8,7 @@ item.stone_piece.name=Stone piece
 
 # temporary transation method
 #minerals
+mineral.stone=Stone
 mineral.gold=Gold
 mineral.iron=Iron
 mineral.coal=Coal
@@ -49,9 +50,17 @@ var.ore_piece=ore piece
 var.ore_chunk=ore chunk
 var.ore_dust=ore dust
 var.ore_oily_ball=oily ore ball
-var.ore_wet_ball=wet ore ball
+var.ore_wet_ball=ore clay
 var.dust=dust
 var.dust_small=small dust
 var.dust_tiny=tiny dust
+
+#oreRichness
+richness.none=
+richness.low=Poor
+richness.medeum=Moderate
+richness.good=Good
+richness.rich=Rich
+richness.amazing=Solid
 
 #blocks

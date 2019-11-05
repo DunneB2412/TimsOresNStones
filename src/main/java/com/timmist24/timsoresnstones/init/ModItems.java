@@ -1,10 +1,10 @@
 package com.timmist24.timsoresnstones.init;
 
 import com.timmist24.timsoresnstones.TimsOresNStonesMain;
-import com.timmist24.timsoresnstones.items.ItemTosm;
 import com.timmist24.timsoresnstones.items.materials.Dust;
-import com.timmist24.timsoresnstones.items.materials.ore.Mineral;
+import com.timmist24.timsoresnstones.items.materials.ore.mineral.Mineral;
 import com.timmist24.timsoresnstones.items.materials.ore.OrePiece;
+import com.timmist24.timsoresnstones.items.materials.ore.mineral.MineralVariant;
 import com.timmist24.timsoresnstones.texturing.Color;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -56,7 +56,7 @@ public class ModItems {
                         matcher1 = Pattern.compile(".*\\[type=(\\w+)\\]").matcher(stateAsString);
                         Matcher matcher2 = Pattern.compile(".+:(\\w+)").matcher(stateAsString);
                         String mineralTitle = (matcher1.matches() ? matcher1.group(1) : matcher2.matches() ? matcher2.group(1) : stateAsString).replaceAll("_ore", "");
-                        Mineral newMineral = new Mineral(mineralTitle, false, 10, new Color("000000"), 1);
+                        Mineral newMineral = new Mineral(mineralTitle, MineralVariant.METAL, false, 10, 0, new Color("000000"), 1);
                         foundMinerals.add(mineralTitle);
                         if (!MINERAL_LIST.contains(newMineral)) {
                             MINERAL_LIST.add(newMineral);
@@ -70,8 +70,6 @@ public class ModItems {
         TimsOresNStonesMain.logger.info("Tims instance set up with"+MINERAL_LIST+"");
     }
 
-
-    public static final Item STONE_PIECE = new ItemTosm("stone_piece");
     public static final Item ORE = new OrePiece("ore");
     public static final Item DUST = new Dust("dust");
 }

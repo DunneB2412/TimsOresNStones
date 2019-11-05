@@ -1,6 +1,6 @@
 package com.timmist24.timsoresnstones.blocks;
 
-import com.timmist24.timsoresnstones.items.materials.ore.Mineral;
+import com.timmist24.timsoresnstones.items.materials.ore.mineral.Mineral;
 import com.timmist24.timsoresnstones.texturing.Color;
 import net.minecraft.block.material.Material;
 
