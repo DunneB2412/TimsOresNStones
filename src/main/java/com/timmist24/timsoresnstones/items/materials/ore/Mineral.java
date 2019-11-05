@@ -9,7 +9,7 @@ public class Mineral implements Comparable<Mineral>{
     private static final int DEFAULT_RANDOM_LIM = 45;
 
     public final String title;
-    //private final MineralVariant variant;
+    private final MineralVariant variant;
     private final boolean isOilSoluble;
     private float weightPerUnit;
     private int quantity; // 1 = 1 tiny

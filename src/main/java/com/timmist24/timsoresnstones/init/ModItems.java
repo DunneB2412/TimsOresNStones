@@ -31,10 +31,10 @@ public class ModItems {
         for(String name: names){
             if(Pattern.matches("(ingot|gem|crystal)\\w*", name)){
                 ORE_DICT_TITTLAL.add(name);
+                List<ItemStack> stacks = OreDictionary.getOres(name);
+                TimsOresNStonesMain.logger.info(stacks);
             }
         }
-
-        List<ItemStack> stacks = OreDictionary.getOres("itemScrap");
         Collection<Block> blocks = GameRegistry.findRegistry(Block.class).getValuesCollection();
         String modBeingScanned = "";
         for (Block block: blocks){
