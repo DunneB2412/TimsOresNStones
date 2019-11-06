@@ -8,19 +8,22 @@ import com.timmist24.timsoresnstones.texturing.Color;
 import com.timmist24.timsoresnstones.util.IHasModel;
 import com.timmist24.timsoresnstones.util.References;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.item.IItemPropertyGetter;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraft.world.World;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OrePiece extends Item implements IHasModel, IItemColor {
+public class OrePiece extends Item implements IHasModel{
 
     public List<Mineral> composition = new ArrayList<>();
     private Color color;
@@ -32,7 +35,24 @@ public class OrePiece extends Item implements IHasModel, IItemColor {
         setHasSubtypes(true);
         ModItems.ITEMS.add(this);
         updateColor();
-        Minecraft.getMinecraft().getItemColors().registerItemColorHandler(this, this);
+        Minecraft.getMinecraft().getItemColors().registerItemColorHandler((stack, tintIndex) -> tintIndex==1? this.color.toInt(): 0, this);
+
+        this.addPropertyOverride(new IItemPropertyGetter() {
+
+            @Override
+            public float apply(ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn) {
+                return (float)getPowerLevel(stack);
+            }
+
+            private Object getPowerLevel(ItemStack stack) {
+                NBTTagList entries = stack.getEnchantmentTagList();
+                return null;
+            }
+        });
+    }
+
+    private void addPropertyOverride(IItemPropertyGetter iItemPropertyGetter) {
+        iItemPropertyGetter.apply()
     }
 
     public Color getColor(){
@@ -100,13 +120,5 @@ public class OrePiece extends Item implements IHasModel, IItemColor {
     @Override
     public String toString(){
         return super.getUnlocalizedName();
-    }
-
-    @Override
-    public int colorMultiplier(ItemStack stack, int tintIndex) {
-        if(tintIndex==1){
-            return (int) color.red;
-        }
-        return 0;
     }
 }

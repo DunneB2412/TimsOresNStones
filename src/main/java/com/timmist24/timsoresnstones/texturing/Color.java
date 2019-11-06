@@ -43,6 +43,14 @@ public class Color{
         return (hex.length()==6||hex.length()==8);
     }
 
+    public int toInt() {
+        int color = 0;
+        color |= (int) (this.alpha * 255) << 24;
+        color |= (int) (this.red * 255) << 16;
+        color |= (int) (this.green * 255) << 8;
+        color |= (int) (this.blue * 255);
+        return color;
+    }
     public static Color absCombine(Color colorA, Color colorB) {
         return combine(colorA, colorB, 0.5);
     }
