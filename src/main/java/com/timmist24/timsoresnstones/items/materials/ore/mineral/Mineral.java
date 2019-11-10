@@ -1,72 +1,90 @@
 package com.timmist24.timsoresnstones.items.materials.ore.mineral;
 
 import com.timmist24.timsoresnstones.texturing.Color;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.oredict.OreDictionary;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class Mineral implements Comparable<Mineral>{
-    public static final Mineral LOWEST = new Mineral("low", MineralVariant.METAL, false, 0.0f, 0, new Color("00000000"), 0);
+    private static final List<Mineral> MINERALS = new ArrayList<>();
     private static final Random RANDOM = new Random();
-    private static final int DEFAULT_RANDOM_LIM = 45;
-    private static final float DEFAULT_UNSTABILITY_DEVIDER = 3.0f;
+    private static final float WEIGHT_FACTOR = 0.33f;
+    private static final int UNSTABILITY_OIL_THRESHOLD = 30;
+    static {
+        MINERALS.add(new Mineral("lowest", MineralVariant.METAL, false, 0.0f, 0, new Color("00000000")));
+    }
+    public static String add(Mineral mineral){
+        if(!MINERALS.contains(mineral)) {
+            MINERALS.add(mineral);
+            return mineral.title;
+        }
+        return null;
+    }
+    public static String getMinerals() {
+        return MINERALS+"";
+    }
+    public static Mineral getMineral(int i) {
+        return MINERALS.get(i);
+    }
+    public static int numberOfMinerals(){
+        return MINERALS.size();
+    }
 
-    private final int unstability;// bigger is more unstable, 0 for none
+
+
+
+
+
+
     public final String title;
+    public final Color color;
+    private final int unstability;
     private final MineralVariant type;
     private final boolean isOilSoluble;
-    private float weightPerUnit;
-    private int quantity; // 1 = 1 tiny
-    public final Color color;
-
-
-    public Mineral(String title, MineralVariant type, boolean isOilSoluble, float weightPerUnit,  int unstability, Color color) {
-        this(title, type, isOilSoluble, weightPerUnit, unstability, color, RANDOM.nextInt(DEFAULT_RANDOM_LIM));
-    }
-    public Mineral(String title,MineralVariant type, boolean isOilSoluble, float weightPerUnit, int unstability, Color color, int quantity){
+    private final float weightPerUnit;
+    public Mineral(String title, MineralVariant type, boolean isOilSoluble, float weightPerUnit, int unstability, Color color) {
         this.title = title;
         this.type = type;
         this.unstability = unstability;
         this.isOilSoluble = isOilSoluble;
         this.weightPerUnit = weightPerUnit;
         this.color = color;
-        this.quantity = quantity;
-    }
-    public Mineral(Mineral other, int quantity){
-        this(other.title, other.type, other.isOilSoluble, other.weightPerUnit, other.unstability, other.color, quantity);
+        //OreDictionary.
     }
 
-    public Mineral extractMaterial(double eficancy){
-        int extctedQuantity = (int) (quantity*(eficancy/100)); //this should round down
-        quantity = Math.max(0, quantity - extctedQuantity);
-        return new Mineral(this, extctedQuantity);
+    public final String getOreDictName(){
+        return type.toString();
     }
-    public int getQuantity(){
-        return quantity;
-    }
-    public boolean isOilSoluble(){
-        if(RANDOM.nextInt(unstability)>10) {
+    public boolean isOilSoluble() {
+        if(unstability>UNSTABILITY_OIL_THRESHOLD){
             return RANDOM.nextBoolean();
         }
         return isOilSoluble;
     }
-    public float getWeightPerUnit(){
-        float randomChange = RANDOM.nextInt(unstability)/3.0f;
-        if(RANDOM.nextBoolean()) {
+    public float getWeightPerUnit() {
+        float randomChange = RANDOM.nextFloat()*WEIGHT_FACTOR;
+        if(RANDOM.nextBoolean()){
             return weightPerUnit+randomChange;
         }
-        return  weightPerUnit-randomChange;
+        return weightPerUnit- randomChange;
+    }
+    public MineralVariant getType() {
+        return type;
     }
     public String getTranslation(){
-        return "";
+        throw new UnsupportedOperationException();
     }
-
     @Override
     public String toString(){
-       return "Mineral:"+title+"["+quantity+"]";
+       return "Mineral:"+title+".";
     }
     @Override
     public int compareTo(Mineral other) {
-        return quantity-other.quantity;
+        return title.compareTo(other.title);
     }
     @Override
     public boolean equals(Object other){

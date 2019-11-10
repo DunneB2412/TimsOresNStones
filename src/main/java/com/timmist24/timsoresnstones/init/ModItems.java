@@ -21,7 +21,7 @@ import java.util.regex.Pattern;
 
 public class ModItems {
     public static final List<Item> ITEMS = new ArrayList<>();
-    public static final List<Mineral> MINERAL_LIST = new ArrayList<>();
+
     private static final List<String> ORE_DICT_TITTLAL = new ArrayList<>();
 
 
@@ -32,7 +32,6 @@ public class ModItems {
             if(Pattern.matches("(ingot|gem|crystal)\\w*", name)){
                 ORE_DICT_TITTLAL.add(name);
                 List<ItemStack> stacks = OreDictionary.getOres(name);
-                TimsOresNStonesMain.logger.info(stacks);
             }
         }
         Collection<Block> blocks = GameRegistry.findRegistry(Block.class).getValuesCollection();
@@ -56,18 +55,16 @@ public class ModItems {
                         matcher1 = Pattern.compile(".*\\[type=(\\w+)\\]").matcher(stateAsString);
                         Matcher matcher2 = Pattern.compile(".+:(\\w+)").matcher(stateAsString);
                         String mineralTitle = (matcher1.matches() ? matcher1.group(1) : matcher2.matches() ? matcher2.group(1) : stateAsString).replaceAll("_ore", "");
-                        Mineral newMineral = new Mineral(mineralTitle, MineralVariant.METAL, false, 10, 0, new Color("000000"), 1);
+                        Mineral newMineral = new Mineral(mineralTitle, MineralVariant.METAL, false, 10, 0, new Color("000000"));
                         foundMinerals.add(mineralTitle);
-                        if (!MINERAL_LIST.contains(newMineral)) {
-                            MINERAL_LIST.add(newMineral);
-                            newMinerals.add(mineralTitle);
-                        }
+                        newMinerals.add(Mineral.add(newMineral));
+
                     }
                 }
                 TimsOresNStonesMain.logger.info("Found: "+blockAsString+", containing:"+foundMinerals+" that were ores, of which:"+newMinerals+ (newMinerals.size()>1?" were":" was")+" new.");
             }
         }
-        TimsOresNStonesMain.logger.info("Tims instance set up with"+MINERAL_LIST+"");
+        TimsOresNStonesMain.logger.info("Tims instance set up with"+ Mineral.getMinerals()+"");
     }
 
     public static final Item ORE = new OrePiece("ore");
