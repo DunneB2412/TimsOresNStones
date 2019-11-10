@@ -1,9 +1,6 @@
 package com.timmist24.timsoresnstones.items.materials.ore.mineral;
 
 import com.timmist24.timsoresnstones.texturing.Color;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.oredict.OreDictionary;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,7 +50,6 @@ public class Mineral implements Comparable<Mineral>{
         this.isOilSoluble = isOilSoluble;
         this.weightPerUnit = weightPerUnit;
         this.color = color;
-        //OreDictionary.
     }
 
     public final String getOreDictName(){
@@ -74,9 +70,6 @@ public class Mineral implements Comparable<Mineral>{
     }
     public MineralVariant getType() {
         return type;
-    }
-    public String getTranslation(){
-        throw new UnsupportedOperationException();
     }
     @Override
     public String toString(){

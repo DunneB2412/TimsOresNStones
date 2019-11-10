@@ -1,10 +1,7 @@
 package com.timmist24.timsoresnstones.init.recipies;
 
-import com.timmist24.timsoresnstones.items.materials.ore.mineral.Mineral;
 import net.minecraft.item.Item;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public  enum FiltrationMethods {
     CRUSHING(((itemIn, strength) -> new Item[0])),
