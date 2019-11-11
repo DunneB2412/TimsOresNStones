@@ -40,4 +40,16 @@ public enum MineralVariant {
                 return super.toString();
         }
     }
+    public static MineralVariant getFromString(String key){
+        switch (key){
+            case "ingot":
+                return MineralVariant.METAL;
+            case "gem":
+                return MineralVariant.GEM;
+            case "liquid":
+                return MineralVariant.LIQUID;
+            default:
+                return MineralVariant.CRYSTAL;
+        }
+    }
 }

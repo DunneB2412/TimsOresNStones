@@ -5,9 +5,6 @@ error.broken_item=Broken Item
 itemGroup.tims_blocks=Tim's blocks
 itemGroup.tims_items=Tim's resorces
 
-#Items
-item.stone_piece.name=Stone piece
-
 # temporary transation method
 #minerals
 mineral.stone=Stone

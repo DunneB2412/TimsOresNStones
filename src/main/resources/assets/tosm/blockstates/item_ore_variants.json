@@ -8,13 +8,19 @@
     "type": {
       "ore_piece": {
         "textures": {
-          "layer0": "tosm:items/ore_base2",
-          "layer1": "tosm:items/ore_overlay2"
+          "layer0": "tosm:items/ore_base",
+          "layer1": "tosm:items/ore_overlay"
         }
       },
       "ore_chunk": {
         "textures": {
           "layer0": "tosm:items/stone_chunk"
+        }
+      },
+      "ore_grane": {
+        "textures": {
+          "layer0": "tosm:items/ore_grane_base",
+          "layer1": "tosm:items/ore_grane_overlay"
         }
       },
       "ore_dust": {
@@ -31,6 +37,12 @@
       "ore_wet_ball": {
         "textures": {
           "layer0": "tosm:items/wet_ore_base"
+        }
+      },
+      "scrap": {
+        "textures": {
+          "layer0": "tosm:items/scrap_base",
+          "layer1": "tosm:items/scrap_overlay"
         }
       }
     }

@@ -1,19 +1,22 @@
 package com.timmist24.timsoresnstones.util;
 
 public class Util {
-    public static String regexContainsPlus(String[] search){
+    public static String regexContainsPlus(String[] search) {
         StringBuilder regexOut = new StringBuilder(".*(");
-        for(String s: search){
-            String firstChar = s.charAt(0)+"";
-            String rest = new StringBuilder(s).deleteCharAt(0).toString().toLowerCase();
-
-            if(regexOut.length()>3){
+        for (String s : search) {
+            if (regexOut.length() > 3) {
                 regexOut.append("|");
             }
-            if(search.length>1) regexOut.append("(?:");
-            regexOut.append("(?:[^a-zA-Z]").append(firstChar.toLowerCase()).append("|").append(firstChar.toUpperCase()).append(")").append(rest);
-            if(search.length>1)regexOut.append(")");
+            if (search.length > 1) regexOut.append("(?:");
+            regexOut.append(regexFind(s));
+            if (search.length > 1) regexOut.append(")");
         }
         return regexOut + ").*";
+    }
+
+    public static String regexFind(String target) {
+        String firstChar = target.charAt(0) + "";
+        String rest = new StringBuilder(target).deleteCharAt(0).toString().toLowerCase();
+        return ("(?:[^a-zA-Z]") + (firstChar.toLowerCase()) + ("|") + (firstChar.toUpperCase()) + (")") + (rest);
     }
 }

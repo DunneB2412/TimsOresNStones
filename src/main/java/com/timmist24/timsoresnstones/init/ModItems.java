@@ -44,27 +44,27 @@ public class ModItems {
                     TimsOresNStonesMain.logger.info("Searching: "+modBeingScanned+" for ore.");
                 }
             }
-            if(Pattern.matches("Block.*((?:(?:[^a-zA-Z]o|O)re)|(?:(?:[^a-zA-Z]r|R)esource)).*", blockAsString)) {
-                String test1 = ".*((?:(?:[^a-zA-Z]o|O)re)|(?:(?:[^a-zA-Z]r|R)esource)).*";
-                String regex = Util.regexContainsPlus(new String[]{"ore", "resource"});
-                String test2 = ".*((?:[^a-zA-Z]o|O)re).*";
-                regex = Util.regexContainsPlus(new String[]{"ore"});
-                regex = Util.regexContainsPlus(new String[]{});
+            if(Pattern.matches("Block"+Util.regexContainsPlus(new String[]{"ore", "resource"}), blockAsString)) {
 
                 List<IBlockState> list = block.getBlockState().getValidStates();
                 List<String> foundMinerals = new ArrayList<>();
                 List<String> newMinerals = new ArrayList<>();
                 for (IBlockState state : list) {
                     String stateAsString = state.toString();
-                    if(Pattern.matches(".*((?:[^a-zA-Z]o|O)re).*", stateAsString)){
-                        matcher1 = Pattern.compile(".*\\[type=(\\w+)\\]").matcher(stateAsString);
+                    if(Pattern.matches(Util.regexContainsPlus(new String[]{"ore"}), stateAsString)){
+                        matcher1 = Pattern.compile(".*\\[type=(\\w+).*").matcher(stateAsString);
                         Matcher matcher2 = Pattern.compile(".+:(\\w+)").matcher(stateAsString);
                         String mineralTitle = (matcher1.matches() ? matcher1.group(1) : matcher2.matches() ? matcher2.group(1) : stateAsString).replaceAll("_ore", "");
                         MineralVariant mineralType = MineralVariant.METAL;//default
-                        for(String dictionaryEntry: ORE_DICT_TITTLALS){
-                            if(dictionaryEntry.contains(mineralTitle)){
-                                mineralType = MineralVariant.METAL;
+                        int index = 0;
+                        Boolean found = false;
+                        while(index<ORE_DICT_TITTLALS.size()&&!found){
+                            String dictionaryEntry = ORE_DICT_TITTLALS.get(index);
+                            if(Pattern.matches(Util.regexContainsPlus(new String[]{mineralTitle}), dictionaryEntry)){
+                                mineralType = MineralVariant.getFromString(dictionaryEntry.replaceAll(Util.regexFind(mineralTitle), ""));
+                                found = true;
                             }
+                            index++;
                         }
                         Mineral newMineral = new Mineral(mineralTitle, mineralType, false, 10, 0, new Color("000000"));
                         foundMinerals.add(mineralTitle);

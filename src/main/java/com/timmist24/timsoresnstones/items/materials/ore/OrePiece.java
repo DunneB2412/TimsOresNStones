@@ -18,6 +18,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class OrePiece extends Item implements IHasModel{
 
+
     public OrePiece(String itemName) {
         super();
         setUnlocalizedName(itemName);
@@ -64,7 +65,7 @@ public class OrePiece extends Item implements IHasModel{
     @Override
     public String getItemStackDisplayName(@NotNull ItemStack stack) {
         NBTTagCompound nbt = stack.getTagCompound();
-        if((nbt == null)||!(nbt.hasKey("reference"))||stack.getMetadata()>=OreVariant.values().length){
+        if(stack.getMetadata()>=OreVariant.values().length){
             return super.getItemStackDisplayName(stack);
         }
         int mineralUnits = getMineralUnits(nbt);
@@ -73,7 +74,7 @@ public class OrePiece extends Item implements IHasModel{
         String postFix = I18n.format("var."+OreVariant.values()[stack.getMetadata()].toString());
         String titleKey;
         if(mineralUnits<8){
-            postFix = postFix.replaceAll("(ore)", "");
+            postFix = postFix.replaceAll("(ore )", "");
             titleKey = "mineral.stone";
         }else {
             titleKey = "mineral."+primaryMineral.title;
@@ -81,7 +82,8 @@ public class OrePiece extends Item implements IHasModel{
         String prefixKey = "richness."+(mineralUnits<1? "none": mineralUnits<8? "poor": mineralUnits<72? "moderate": mineralUnits<144? "good": mineralUnits<288? "rich":"solid");
         String prefix = I18n.format(prefixKey);
         String title = I18n.format(titleKey);
-        return prefix+" "+title+" "+postFix;
+        String displayName = ((prefix.length()==0? "":prefix+" ")+title+" "+postFix).toLowerCase();
+        return displayName.replaceFirst(".", (displayName.charAt(0)+"").toUpperCase());
     }
     @Override
     public String toString(){
