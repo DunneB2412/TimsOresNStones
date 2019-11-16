@@ -14,7 +14,8 @@
       },
       "ore_chunk": {
         "textures": {
-          "layer0": "tosm:items/stone_chunk"
+          "layer0": "tosm:items/ore_chunk_base",
+          "layer1": "tosm:items/ore_chunk_overlay"
         }
       },
       "ore_grane": {
@@ -46,5 +47,13 @@
         }
       }
     }
-  }
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "tosm:test": 0.0
+      },
+      "model": "examplemod:blockState/item_oreless_variants"
+    }
+  ]
 }

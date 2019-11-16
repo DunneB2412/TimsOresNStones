@@ -5,7 +5,7 @@ import com.timmist24.timsoresnstones.TimsOresNStonesMain;
 import com.timmist24.timsoresnstones.init.ModItems;
 import com.timmist24.timsoresnstones.items.materials.ore.mineral.Mineral;
 import com.timmist24.timsoresnstones.util.IHasModel;
-import com.timmist24.timsoresnstones.util.References;
+import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -16,7 +16,8 @@ import net.minecraft.util.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 
 
-public class OrePiece extends Item implements IHasModel{
+
+public class OrePiece extends Item implements IHasModel, IItemColor{
 
 
     public OrePiece(String itemName) {
@@ -26,9 +27,6 @@ public class OrePiece extends Item implements IHasModel{
         setCreativeTab(TimsOresNStonesMain.CREATIVE_TABS.TAB_TIMS_ITEMS);
         setHasSubtypes(true);
         ModItems.ITEMS.add(this);
-        //Minecraft.getMinecraft().getItemColors().registerItemColorHandler((stack, tintIndex) -> tintIndex==1? this.color.toInt(): 0, this);
-
-        this.addPropertyOverride(new ResourceLocation("tosm", "thing"), (stack, worldIn, entityIn) -> (float)getMineralUnits(stack.getTagCompound())/References.MAZIMUM_MINERAL);
     }
 
     @Override
@@ -102,5 +100,11 @@ public class OrePiece extends Item implements IHasModel{
             return Mineral.getMineral(0);
         }
         return Mineral.getMineral(nbt.getCompoundTag(nbt.getIntArray("minerals")[0]+"pos").getInteger("MineralsIndex"));
+    }
+
+    @Override
+    public int colorMultiplier(ItemStack stack, int tintIndex) {
+        if (tintIndex != 0) return 0xFFFFFFFF;
+        return getPrimaryMineral(stack.getTagCompound()).color.toInt();
     }
 }

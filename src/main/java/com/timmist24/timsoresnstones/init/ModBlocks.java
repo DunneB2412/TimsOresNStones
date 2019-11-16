@@ -1,7 +1,7 @@
 package com.timmist24.timsoresnstones.init;
 
-import com.timmist24.timsoresnstones.blocks.BlockBase;
-import com.timmist24.timsoresnstones.blocks.BlockBaseFalling;
+
+import com.timmist24.timsoresnstones.blocks.BlockOfOrePieces;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 
@@ -12,5 +12,5 @@ public class ModBlocks {
 
     public static final List<Block> BLOCKS = new ArrayList<Block>();
 
-    public static final Block COMPRESSED_IRON_ORE = new BlockBaseFalling("block_iron_ore", Material.SAND);
+    public static final Block COMPRESSED_IRON_ORE = new BlockOfOrePieces("block_iron_ore", Material.SAND);
 }

@@ -8,7 +8,8 @@ public enum MineralVariant {
     METAL(DustVariant.values(), OreVariant.values()),
     GEM(DustVariant.values(), OreVariant.values()),
     CRYSTAL(DustVariant.values(), OreVariant.values()),
-    LIQUID(new DustVariant[]{}, new OreVariant[]{OreVariant.PIECE, OreVariant.CHUNK});
+    LIQUID(new DustVariant[]{}, new OreVariant[]{OreVariant.PIECE, OreVariant.CHUNK}),
+    ALLOY(DustVariant.values(), new OreVariant[]{});
 
     private final DustVariant[] dustVariants;
     private final OreVariant[] oreVariants;

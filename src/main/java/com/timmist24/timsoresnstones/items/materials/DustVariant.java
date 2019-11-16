@@ -24,13 +24,12 @@ public enum DustVariant {
     @Override
     public String toString() {
         switch (this){
-            case DUST:
+            default:
                 return "dust";
             case DUST_SMALL:
                 return "dust_small";
             case DUST_TINY:
                 return "dust_tiny";
         }
-        return "";
     }
 }

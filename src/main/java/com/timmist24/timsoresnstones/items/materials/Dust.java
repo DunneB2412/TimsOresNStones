@@ -6,6 +6,7 @@ import com.timmist24.timsoresnstones.init.ModItems;
 import com.timmist24.timsoresnstones.items.materials.ore.mineral.Mineral;
 import com.timmist24.timsoresnstones.texturing.Color;
 import com.timmist24.timsoresnstones.util.IHasModel;
+import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -17,7 +18,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Dust extends Item implements IHasModel {
+public class Dust extends Item implements IHasModel, IItemColor {
     private final List<ItemStack> itemStacks = new ArrayList<>();
 
 
@@ -33,14 +34,10 @@ public class Dust extends Item implements IHasModel {
 
     private void prepareItemstacks() {
         for(DustVariant variant: DustVariant.values()) {
-            for(int i = 0; i< Mineral.numberOfMinerals(); i++){
+            for(int i = 1; i< Mineral.numberOfMinerals(); i++){ // skips the empty dust
                 itemStacks.add(new ItemStack(this, 1, (i*10)+variant.ordinal()));
             }
         }
-    }
-
-    public Color getColor(@NotNull ItemStack itemStack){
-        return Mineral.getMineral(itemStack.getMetadata()/10).color;
     }
     public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
         if (this.isInCreativeTab(tab))
@@ -75,5 +72,9 @@ public class Dust extends Item implements IHasModel {
         return super.getUnlocalizedName();
     }
 
+    @Override
+    public int colorMultiplier(ItemStack stack, int tintIndex) {
+        return Mineral.getMineral(stack.getMetadata()/10).color.toInt();
+    }
 }
 

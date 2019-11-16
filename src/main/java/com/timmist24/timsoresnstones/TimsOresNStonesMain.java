@@ -5,19 +5,17 @@ import com.timmist24.timsoresnstones.init.ModCreativeTabs;
 import com.timmist24.timsoresnstones.init.ModItems;
 import com.timmist24.timsoresnstones.proxy.CommonProxy;
 import com.timmist24.timsoresnstones.util.References;
-import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.color.IBlockColor;
+import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.oredict.OreDictionary;
 import org.apache.logging.log4j.Logger;
 
-import java.util.Collection;
 
 @Mod(modid = References.MODID, name = References.NAME, version = References.VERSION, acceptedMinecraftVersions = References.ACCEPTED_VERSIONS)//, dependencies = References.DEPENDENCIES)
 public class TimsOresNStonesMain
@@ -40,10 +38,15 @@ public class TimsOresNStonesMain
     public void init(FMLInitializationEvent event)
     {
         CREATIVE_TABS.updateIcone(ModItems.ORE, ModBlocks.COMPRESSED_IRON_ORE);
+        Minecraft.getMinecraft().getItemColors().registerItemColorHandler((IItemColor) ModItems.ORE, ModItems.ORE);
+        Minecraft.getMinecraft().getItemColors().registerItemColorHandler((IItemColor) ModItems.DUST, ModItems.DUST);
+        Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler((IBlockColor) ModBlocks.COMPRESSED_IRON_ORE, ModBlocks.COMPRESSED_IRON_ORE);
+        Minecraft.getMinecraft().getItemColors().registerItemColorHandler((IItemColor) ModItems.ORE, ModBlocks.COMPRESSED_IRON_ORE);
     }
 
     @EventHandler
     public void PostInit(FMLPostInitializationEvent event)
     {
+
     }
 }

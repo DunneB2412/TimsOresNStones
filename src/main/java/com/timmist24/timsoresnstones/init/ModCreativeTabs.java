@@ -6,16 +6,23 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 public class ModCreativeTabs {
-    public final CreativeTabs TAB_TIMS_ITEMS;
+    public final CreativeTabs TAB_TIMS_ORE;
+    public final CreativeTabs TAB_ITEMS_CMONENTS;
     public final CreativeTabs TAB_TIMS_BLOCKS;
+
     private Item timsItemsIcon;
+    private Item timsComponentsIcon;
     private Block timsBlocksIcon;
     public ModCreativeTabs(){
-        TAB_TIMS_ITEMS = new CreativeTabs("tims_items") {
+        TAB_TIMS_ORE = new CreativeTabs("tims_ores") {
             @Override
             public ItemStack getTabIconItem() {
                 return new ItemStack(timsItemsIcon);
             }
+        };
+        TAB_ITEMS_CMONENTS = new CreativeTabs("tims_components") {
+            @Override
+            public ItemStack getTabIconItem() { return new ItemStack(timsComponentsIcon); }
         };
         TAB_TIMS_BLOCKS = new CreativeTabs("tims_items") {
             @Override
@@ -24,8 +31,10 @@ public class ModCreativeTabs {
             }
         };
     }
-    public void updateIcone(Item item, Block block){
+    public void updateIcone(Item item, Item item2, Block block){
         timsItemsIcon = item;
+        timsComponentsIcon = item2;
         timsBlocksIcon = block;
+
     }
 }

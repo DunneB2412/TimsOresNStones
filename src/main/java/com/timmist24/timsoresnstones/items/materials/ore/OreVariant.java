@@ -21,8 +21,7 @@ public enum OreVariant {
     @Override
     public String toString() {
         switch (this){
-            //smaller piece
-            case PIECE:
+            default:
                 return "ore_piece";
             case CHUNK:
                 return "ore_chunk";
@@ -37,6 +36,5 @@ public enum OreVariant {
             case SCRAP:
                 return "scrap";
         }
-        return "";
     }
 }

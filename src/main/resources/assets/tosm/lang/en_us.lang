@@ -3,7 +3,8 @@ error.broken_item=Broken Item
 
 #creative tabs
 itemGroup.tims_blocks=Tim's blocks
-itemGroup.tims_items=Tim's resorces
+itemGroup.tims_ore=Tim's resorces
+itemGroup.tims_components=Tim's crafting ingrediants
 
 # temporary transation method
 #minerals
