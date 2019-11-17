@@ -1,0 +1,46 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "builtin/generated",
+    "transform": "forge:default-item"
+  },
+  "variants": {
+    "type": {
+      "ingot": {
+        "textures": {
+          "layer0": "tosm:items/ingot_base"
+        }
+      },
+      "nugget": {
+        "textures": {
+          "layer0": "tosm:items/nugget_base"
+        }
+      },
+      "rod": {
+        "textures": {
+          "layer0": "tosm:items/rod_base"
+        }
+      },
+      "heavy_rod": {
+        "textures": {
+          "layer0": "tosm:items/rod_heavy_base"
+        }
+      },
+      "gear": {
+        "textures": {
+          "layer0": "tosm:items/gear_base"
+        }
+      },
+      "plate": {
+        "textures": {
+          "layer0": "tosm:items/plate_base"
+        }
+      },
+      "large_plate": {
+        "textures": {
+          "layer0": "tosm:items/plate_large_base"
+        }
+      }
+    }
+  }
+}

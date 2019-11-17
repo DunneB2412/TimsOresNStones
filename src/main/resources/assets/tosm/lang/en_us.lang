@@ -3,7 +3,7 @@ error.broken_item=Broken Item
 
 #creative tabs
 itemGroup.tims_blocks=Tim's blocks
-itemGroup.tims_ore=Tim's resorces
+itemGroup.tims_ores=Tim's resorces
 itemGroup.tims_components=Tim's crafting ingrediants
 
 # temporary transation method
@@ -48,9 +48,11 @@ mineral.osmium=Osmium
 #variants
 var.ore_piece=ore piece
 var.ore_chunk=ore chunk
+var.ore_grane=ore grane
 var.ore_dust=ore dust
 var.ore_oily_ball=oily ore ball
 var.ore_wet_ball=ore clay
+var.scrap=scrap
 var.dust=dust
 var.dust_small=small dust
 var.dust_tiny=tiny dust

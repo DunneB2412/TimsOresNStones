@@ -24,7 +24,7 @@ public class OrePiece extends Item implements IHasModel, IItemColor{
         super();
         setUnlocalizedName(itemName);
         setRegistryName(itemName);
-        setCreativeTab(TimsOresNStonesMain.CREATIVE_TABS.TAB_TIMS_ITEMS);
+        setCreativeTab(TimsOresNStonesMain.CREATIVE_TABS.TAB_TIMS_ORE);
         setHasSubtypes(true);
         ModItems.ITEMS.add(this);
     }
@@ -42,9 +42,9 @@ public class OrePiece extends Item implements IHasModel, IItemColor{
     @Override
     public void registerModels()// extract from proxy?
     {
+        String resorcePath =this.getUnlocalizedName().replaceAll("\\.","_")+"_variants";
+        ResourceLocation resourceLocation= new ResourceLocation("tosm",resorcePath);
         for(OreVariant oreVariant: OreVariant.values()){
-            String resorcePath =this.getUnlocalizedName().replaceAll("\\.","_")+"_variants";
-            ResourceLocation resourceLocation= new ResourceLocation("tosm",resorcePath);
             TimsOresNStonesMain.proxy.registorItemRenderer(this, oreVariant.ordinal(), "type="+ oreVariant.toString(), resourceLocation);
 
         }

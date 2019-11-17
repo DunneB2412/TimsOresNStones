@@ -4,7 +4,6 @@ package com.timmist24.timsoresnstones.items.materials;
 import com.timmist24.timsoresnstones.TimsOresNStonesMain;
 import com.timmist24.timsoresnstones.init.ModItems;
 import com.timmist24.timsoresnstones.items.materials.ore.mineral.Mineral;
-import com.timmist24.timsoresnstones.texturing.Color;
 import com.timmist24.timsoresnstones.util.IHasModel;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.client.resources.I18n;
@@ -18,28 +17,29 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Dust extends Item implements IHasModel, IItemColor {
+public class MinerlaVariedItem extends Item implements IHasModel, IItemColor {
     private final List<ItemStack> itemStacks = new ArrayList<>();
+    private final Enum[] variants;
 
 
-    public Dust(String itemName) {
+    public MinerlaVariedItem(String itemName, Enum[] variants) {
         super();
         setUnlocalizedName(itemName);
         setRegistryName(itemName);
-        setCreativeTab(TimsOresNStonesMain.CREATIVE_TABS.TAB_TIMS_ITEMS);
+        this.variants = variants;
         setHasSubtypes(true);
         ModItems.ITEMS.add(this);
         prepareItemstacks();
     }
 
     private void prepareItemstacks() {
-        for(DustVariant variant: DustVariant.values()) {
+        for(Enum variant: variants) {
             for(int i = 1; i< Mineral.numberOfMinerals(); i++){ // skips the empty dust
                 itemStacks.add(new ItemStack(this, 1, (i*10)+variant.ordinal()));
             }
         }
     }
-    public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
+    public void getSubItems(@NotNull CreativeTabs tab, @NotNull NonNullList<ItemStack> items) {
         if (this.isInCreativeTab(tab))
         {
             items.addAll(itemStacks);
@@ -48,22 +48,25 @@ public class Dust extends Item implements IHasModel, IItemColor {
     @Override
     public void registerModels()// extract from proxy?
     {
+        String resorcePath =this.getUnlocalizedName().replaceAll("\\.","_")+"_variants";
+        ResourceLocation resourceLocation= new ResourceLocation("tosm",resorcePath);
+        TimsOresNStonesMain.proxy.registorItemRenderer(this, 0, "type="+variants[0].toString(), resourceLocation);
         for(ItemStack itemStack: itemStacks) {
             int varentIndex = itemStack.getMetadata()%10;
-            String resorcePath =this.getUnlocalizedName().replaceAll("\\.","_")+"_variants";
-            ResourceLocation resourceLocation= new ResourceLocation("tosm",resorcePath);
-            TimsOresNStonesMain.proxy.registorItemRenderer(this, itemStack.getMetadata(), "type="+DustVariant.values()[varentIndex].toString(), resourceLocation);
+            TimsOresNStonesMain.proxy.registorItemRenderer(this, itemStack.getMetadata(), "type="+variants[varentIndex].toString(), resourceLocation);
         }
     }
+    @NotNull
     @Override
     public String getUnlocalizedName(@NotNull ItemStack stack)
     {
         int variantNumber = stack.getMetadata()%10;
-        return "item." + DustVariant.values()[variantNumber].toString();
+        return "item." + variants[variantNumber].toString();
     }
+    @NotNull
     @Override
     public String getItemStackDisplayName(@NotNull ItemStack stack) {
-        String discription = I18n.format("var."+DustVariant.values()[stack.getMetadata()%10].toString());
+        String discription = I18n.format("var."+variants[stack.getMetadata()%10].toString());
         String mineralTitle = I18n.format("mineral."+ Mineral.getMineral(stack.getMetadata()/10).title);//get translation
         return mineralTitle+" "+discription; // basic
     }
@@ -74,6 +77,7 @@ public class Dust extends Item implements IHasModel, IItemColor {
 
     @Override
     public int colorMultiplier(ItemStack stack, int tintIndex) {
+        if (tintIndex != 0) return 0xFFFFFFFF;
         return Mineral.getMineral(stack.getMetadata()/10).color.toInt();
     }
 }

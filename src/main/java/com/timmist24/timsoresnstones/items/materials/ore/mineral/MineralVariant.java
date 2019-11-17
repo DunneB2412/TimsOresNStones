@@ -37,6 +37,8 @@ public enum MineralVariant {
                 return "crystal";
             case LIQUID:
                 return "liquid";
+            case ALLOY:
+                return "alloy";
             default:
                 return super.toString();
         }

@@ -8,6 +8,7 @@ import com.timmist24.timsoresnstones.util.References;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.color.IBlockColor;
 import net.minecraft.client.renderer.color.IItemColor;
+import net.minecraft.item.Item;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -37,9 +38,9 @@ public class TimsOresNStonesMain
     @EventHandler
     public void init(FMLInitializationEvent event)
     {
-        CREATIVE_TABS.updateIcone(ModItems.ORE, ModBlocks.COMPRESSED_IRON_ORE);
+        CREATIVE_TABS.updateIcone(ModItems.ORE,ModItems.PART, ModBlocks.COMPRESSED_IRON_ORE);
         Minecraft.getMinecraft().getItemColors().registerItemColorHandler((IItemColor) ModItems.ORE, ModItems.ORE);
-        Minecraft.getMinecraft().getItemColors().registerItemColorHandler((IItemColor) ModItems.DUST, ModItems.DUST);
+        Minecraft.getMinecraft().getItemColors().registerItemColorHandler((IItemColor) ModItems.DUST, ModItems.DUST,ModItems.PART);
         Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler((IBlockColor) ModBlocks.COMPRESSED_IRON_ORE, ModBlocks.COMPRESSED_IRON_ORE);
         Minecraft.getMinecraft().getItemColors().registerItemColorHandler((IItemColor) ModItems.ORE, ModBlocks.COMPRESSED_IRON_ORE);
     }

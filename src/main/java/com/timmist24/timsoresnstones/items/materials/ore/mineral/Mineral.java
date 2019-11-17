@@ -22,6 +22,11 @@ public class Mineral implements Comparable<Mineral>{
     private static final int UNSTABILITY_OIL_THRESHOLD = 30;
     static {
         MINERALS.add(new Mineral("empty", MineralVariant.METAL, false, 0.0f, 0, new Color("bebebe")));
+        bruteForceInitiate(); // so it can later be conditional
+
+    }
+
+    private static void bruteForceInitiate(){
         List<String> oreDictTites = new ArrayList<>();
         String[] names = OreDictionary.getOreNames();
         for(String name: names){
@@ -53,7 +58,7 @@ public class Mineral implements Comparable<Mineral>{
                         MineralVariant mineralType = MineralVariant.CRYSTAL;//default
                         Color mineralColor = Color.random(new Random());//new Color("b7410e");
                         int index = 0;
-                        Boolean found = false;
+                        boolean found = false;
                         while(index<oreDictTites.size()&&!found){
                             String dictionaryEntry = oreDictTites.get(index);
                             if(Pattern.matches(Util.regexContainsPlus(new String[]{mineralTitle}), dictionaryEntry)){
@@ -63,7 +68,16 @@ public class Mineral implements Comparable<Mineral>{
                             }
                             index++;
                         }
-                        Mineral newMineral = new Mineral(mineralTitle, mineralType, false, 10, 0, mineralColor);
+                        Mineral newMineral;
+                        if(mineralType != MineralVariant.METAL && mineralType != MineralVariant.LIQUID){
+                            newMineral = new Mineral(mineralTitle+"_alloy", MineralVariant.ALLOY, false, 10, 0, mineralColor);
+                            if(!MINERALS.contains(newMineral)) {
+                                MINERALS.add(newMineral);
+                                newMinerals.add(mineralTitle);
+                            }
+                        }
+                        newMineral = new Mineral(mineralTitle, mineralType, false, 10, 0, mineralColor);
+
                         foundMinerals.add(mineralTitle);
                         if(!MINERALS.contains(newMineral)) {
                             MINERALS.add(newMineral);
@@ -76,6 +90,7 @@ public class Mineral implements Comparable<Mineral>{
         }
         TimsOresNStonesMain.logger.info("Tims instance set up with"+ MINERALS+"");
     }
+
     public static Mineral getMineral(int i) {
         return MINERALS.get(i);
     }
@@ -87,14 +102,13 @@ public class Mineral implements Comparable<Mineral>{
 
 
 
-
-
     public final String title;
     public final Color color;
     private final int unstability;
     private final MineralVariant type;
     private final boolean isOilSoluble;
     private final float weightPerUnit;
+    //private final Item parent; use to generate translation and maby to extract existing color
     private Mineral(String title, MineralVariant type, boolean isOilSoluble, float weightPerUnit, int unstability, Color color) {
         this.title = title;
         this.type = type;

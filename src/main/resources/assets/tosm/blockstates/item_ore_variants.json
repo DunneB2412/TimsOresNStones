@@ -47,13 +47,5 @@
         }
       }
     }
-  },
-  "overrides": [
-    {
-      "predicate": {
-        "tosm:test": 0.0
-      },
-      "model": "examplemod:blockState/item_oreless_variants"
-    }
-  ]
+  }
 }

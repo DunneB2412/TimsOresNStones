@@ -7,7 +7,7 @@ import net.minecraft.item.ItemStack;
 
 public class ModCreativeTabs {
     public final CreativeTabs TAB_TIMS_ORE;
-    public final CreativeTabs TAB_ITEMS_CMONENTS;
+    public final CreativeTabs TAB_TIMS_CMPONENTS;
     public final CreativeTabs TAB_TIMS_BLOCKS;
 
     private Item timsItemsIcon;
@@ -20,7 +20,7 @@ public class ModCreativeTabs {
                 return new ItemStack(timsItemsIcon);
             }
         };
-        TAB_ITEMS_CMONENTS = new CreativeTabs("tims_components") {
+        TAB_TIMS_CMPONENTS = new CreativeTabs("tims_components") {
             @Override
             public ItemStack getTabIconItem() { return new ItemStack(timsComponentsIcon); }
         };
