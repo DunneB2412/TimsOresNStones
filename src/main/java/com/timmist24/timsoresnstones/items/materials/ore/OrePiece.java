@@ -105,6 +105,6 @@ public class OrePiece extends Item implements IHasModel, IItemColor{
     @Override
     public int colorMultiplier(ItemStack stack, int tintIndex) {
         if (tintIndex != 0) return 0xFFFFFFFF;
-        return getPrimaryMineral(stack.getTagCompound()).color.toInt();
+        return getPrimaryMineral(stack.getTagCompound()).colors[0].toInt();
     }
 }

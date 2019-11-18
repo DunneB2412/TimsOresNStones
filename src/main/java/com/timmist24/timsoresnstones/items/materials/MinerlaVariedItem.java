@@ -1,6 +1,7 @@
 package com.timmist24.timsoresnstones.items.materials;
 
 
+import com.google.common.collect.Lists;
 import com.timmist24.timsoresnstones.TimsOresNStonesMain;
 import com.timmist24.timsoresnstones.init.ModItems;
 import com.timmist24.timsoresnstones.items.materials.ore.mineral.Mineral;
@@ -15,6 +16,7 @@ import net.minecraft.util.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class MinerlaVariedItem extends Item implements IHasModel, IItemColor {
@@ -35,7 +37,9 @@ public class MinerlaVariedItem extends Item implements IHasModel, IItemColor {
     private void prepareItemstacks() {
         for(Enum variant: variants) {
             for(int i = 1; i< Mineral.numberOfMinerals(); i++){ // skips the empty dust
-                itemStacks.add(new ItemStack(this, 1, (i*10)+variant.ordinal()));
+                if(Arrays.asList(Mineral.getMineral(i).getType().getDustVariants(variants[0])).contains(variant)) {
+                    itemStacks.add(new ItemStack(this, 1, (i*10)+variant.ordinal()));
+                }
             }
         }
     }
@@ -78,7 +82,7 @@ public class MinerlaVariedItem extends Item implements IHasModel, IItemColor {
     @Override
     public int colorMultiplier(ItemStack stack, int tintIndex) {
         if (tintIndex != 0) return 0xFFFFFFFF;
-        return Mineral.getMineral(stack.getMetadata()/10).color.toInt();
+        return Mineral.getMineral(stack.getMetadata()/10).colors[0].toInt();
     }
 }
 

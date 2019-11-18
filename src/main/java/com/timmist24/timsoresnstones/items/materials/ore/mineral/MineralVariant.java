@@ -1,29 +1,34 @@
 package com.timmist24.timsoresnstones.items.materials.ore.mineral;
 
 import com.timmist24.timsoresnstones.items.materials.DustVariant;
+import com.timmist24.timsoresnstones.items.materials.PartVariant;
 import com.timmist24.timsoresnstones.items.materials.ore.OreVariant;
 
 
 public enum MineralVariant {
-    METAL(DustVariant.values(), OreVariant.values()),
-    GEM(DustVariant.values(), OreVariant.values()),
-    CRYSTAL(DustVariant.values(), OreVariant.values()),
-    LIQUID(new DustVariant[]{}, new OreVariant[]{OreVariant.PIECE, OreVariant.CHUNK}),
-    ALLOY(DustVariant.values(), new OreVariant[]{});
+    METAL(DustVariant.values(), OreVariant.values(), PartVariant.values()),
+    GEM(DustVariant.values(), OreVariant.values(),new PartVariant[]{}),
+    CRYSTAL(DustVariant.values(), OreVariant.values(), new PartVariant[]{}),
+    LIQUID(new DustVariant[]{}, new OreVariant[]{OreVariant.PIECE, OreVariant.CHUNK}, new PartVariant[]{}),
+    ALLOY(DustVariant.values(), new OreVariant[]{},PartVariant.values());
 
     private final DustVariant[] dustVariants;
     private final OreVariant[] oreVariants;
-    MineralVariant(DustVariant[] dustVariants, OreVariant[] oreVariants) {
+    private final PartVariant[] partVariants;
+    MineralVariant(DustVariant[] dustVariants, OreVariant[] oreVariants, PartVariant[] partVariants) {
         this.dustVariants=dustVariants;
         this.oreVariants=oreVariants;
+        this.partVariants = partVariants;
     }
 
-    public DustVariant[] getDustVariants() {
-        return dustVariants;
-    }
-
-    public OreVariant[] getOreVariants() {
-        return oreVariants;
+    public Enum[] getDustVariants(Enum targetEnum) {
+        if(targetEnum.getClass()==DustVariant.class){
+            return this.dustVariants;
+        }
+        if(targetEnum.getClass()==OreVariant.class){
+            return this.oreVariants;
+        }
+        return this.partVariants;
     }
 
     @Override

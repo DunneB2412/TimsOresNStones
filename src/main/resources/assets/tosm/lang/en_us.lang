@@ -3,8 +3,8 @@ error.broken_item=Broken Item
 
 #creative tabs
 itemGroup.tims_blocks=Tim's blocks
-itemGroup.tims_ores=Tim's resorces
-itemGroup.tims_components=Tim's crafting ingrediants
+itemGroup.tims_ores=Tim's resources
+itemGroup.tims_components=Tim's crafting ingredients
 
 # temporary transation method
 #minerals
@@ -56,6 +56,13 @@ var.scrap=scrap
 var.dust=dust
 var.dust_small=small dust
 var.dust_tiny=tiny dust
+var.ingot=ingot
+var.nugget=nugget
+var.rod=stick
+var.heavy_rod=thick stick
+var.gear=gear
+var.plate=plate
+var.large_playe=larg plate
 
 #oreRichness
 richness.none=
