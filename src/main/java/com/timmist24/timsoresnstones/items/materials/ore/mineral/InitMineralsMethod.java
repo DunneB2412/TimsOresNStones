@@ -63,7 +63,7 @@ public enum InitMineralsMethod { // lots of work to be done in initalising miner
                         }
                         Mineral newMineral;
                         if(mineralType != MineralVariant.METAL && mineralType != MineralVariant.LIQUID){
-                            newMineral = new Mineral(mineralTitle+"_alloy", MineralVariant.ALLOY, false, 10, 0, mineralColor);
+                            newMineral = new Mineral(mineralTitle+"_alloy", MineralVariant.SYNTETIC, false, 10, 0, mineralColor, Color.combine(mineralColor, new Color("FFFFFF"), 0.20));
                             if(!mineralList.contains(newMineral)) {
                                 mineralList.add(newMineral);
                                 newMinerals.add(mineralTitle);

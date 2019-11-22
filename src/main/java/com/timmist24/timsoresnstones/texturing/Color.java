@@ -74,8 +74,8 @@ public class Color implements IItemColor, IBlockColor {
         double red = Math.sqrt((colorA.red*colorA.red*splitForA)+(colorB.red*colorB.red*splitForB));
         double green = Math.sqrt((colorA.green*colorA.green*splitForA)+(colorB.green*colorB.green*splitForB));
         double blue = Math.sqrt((colorA.blue*colorA.blue*splitForA)+(colorB.blue*colorB.blue*splitForB));
-        double alpha = Math.sqrt((colorA.alpha*colorA.alpha*splitForA)+(colorB.alpha*colorB.alpha*splitForB));
-        return new Color(red, green, blue, alpha);
+        //double alpha = Math.sqrt((colorA.alpha*colorA.alpha*splitForA)+(colorB.alpha*colorB.alpha*splitForB));
+        return new Color(red, green, blue, colorA.alpha);
     }
     @Override
     public String toString(){

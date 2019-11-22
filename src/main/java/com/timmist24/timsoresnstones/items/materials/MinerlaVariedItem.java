@@ -5,6 +5,7 @@ import com.google.common.collect.Lists;
 import com.timmist24.timsoresnstones.TimsOresNStonesMain;
 import com.timmist24.timsoresnstones.init.ModItems;
 import com.timmist24.timsoresnstones.items.materials.ore.mineral.Mineral;
+import com.timmist24.timsoresnstones.texturing.Color;
 import com.timmist24.timsoresnstones.util.IHasModel;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.client.resources.I18n;
@@ -82,7 +83,8 @@ public class MinerlaVariedItem extends Item implements IHasModel, IItemColor {
     @Override
     public int colorMultiplier(ItemStack stack, int tintIndex) {
         if (tintIndex != 0) return 0xFFFFFFFF;
-        return Mineral.getMineral(stack.getMetadata()/10).colors[0].toInt();
+        Color[] colors = Mineral.getMineral(stack.getMetadata()/10).colors;
+        return colors[colors.length-1].toInt();
     }
 }
 

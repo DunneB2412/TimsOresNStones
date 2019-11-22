@@ -10,7 +10,7 @@ public enum MineralVariant {
     GEM(DustVariant.values(), OreVariant.values(),new PartVariant[]{}),
     CRYSTAL(DustVariant.values(), OreVariant.values(), new PartVariant[]{}),
     LIQUID(new DustVariant[]{}, new OreVariant[]{OreVariant.PIECE, OreVariant.CHUNK}, new PartVariant[]{}),
-    ALLOY(DustVariant.values(), new OreVariant[]{},PartVariant.values());
+    SYNTETIC(DustVariant.values(), new OreVariant[]{},PartVariant.values());
 
     private final DustVariant[] dustVariants;
     private final OreVariant[] oreVariants;
@@ -42,7 +42,7 @@ public enum MineralVariant {
                 return "crystal";
             case LIQUID:
                 return "liquid";
-            case ALLOY:
+            case SYNTETIC:
                 return "alloy";
             default:
                 return super.toString();

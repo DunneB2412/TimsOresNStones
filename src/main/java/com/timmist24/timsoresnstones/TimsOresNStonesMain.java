@@ -8,7 +8,6 @@ import com.timmist24.timsoresnstones.util.References;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.color.IBlockColor;
 import net.minecraft.client.renderer.color.IItemColor;
-import net.minecraft.item.Item;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -48,6 +47,6 @@ public class TimsOresNStonesMain
     @EventHandler
     public void PostInit(FMLPostInitializationEvent event)
     {
-
+        //LootTableList.
     }
 }
