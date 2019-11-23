@@ -8,10 +8,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -49,7 +46,7 @@ public enum InitMineralsMethod { // lots of work to be done in initalising miner
                         Matcher matcher2 = Pattern.compile(".+:(\\w+)").matcher(stateAsString);
                         String mineralTitle = (matcher1.matches() ? matcher1.group(1) : matcher2.matches() ? matcher2.group(1) : stateAsString).replaceAll("_ore", "");
                         MineralVariant mineralType = MineralVariant.CRYSTAL;//default
-                        Color mineralColor = Color.random(new Random());//new Color("b7410e");
+                        Color mineralColor = Color.extractColor(Objects.requireNonNull(OreDictionary.getOres(oreDictTites.get(1) + "", true).get(0).getItem().getRegistryName()));//new Color("b7410e");
                         int index = 0;
                         boolean found = false;
                         while(index<oreDictTites.size()&&!found){
@@ -94,6 +91,7 @@ public enum InitMineralsMethod { // lots of work to be done in initalising miner
     public IInitMinerals getInitMinerals() {
         return method;
     }
+
 //    public static InitMineralsMethod get(String target){
 //        switch (target){
 //            default:

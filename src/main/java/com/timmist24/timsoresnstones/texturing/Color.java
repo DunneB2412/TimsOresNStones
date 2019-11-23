@@ -1,16 +1,59 @@
 package com.timmist24.timsoresnstones.texturing;
 
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.color.IBlockColor;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
+import net.minecraft.client.resources.IResource;
 
 import javax.annotation.Nullable;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.Random;
 
 public class Color implements IItemColor, IBlockColor {
+    public static Color extractColor(ResourceLocation resourceLocation){
+
+        try (Resource res = Minecraft.getMinecraft().getResourceManager().getResource(resourceLocation)) {
+            BufferedImage image = ImageIO.read(res.getInputSteram());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try{
+            //String searchKey = "hex color code for"+title
+            int red=0;
+            int green=0;
+            int blue=0;
+            resourceLocation.getResourceDomain();
+            File imageFile = new File(resourceLocation.getResourcePath(),"image.png");
+            BufferedImage image = ImageIO.read(imageFile);
+            return new Color(red, green, blue, 255);
+        } catch (IOException e) {
+            return Color.random(new Random(resourceLocation.hashCode()));
+        }
+    }
+    public static Color absCombine(Color colorA, Color colorB) {
+        return combine(colorA, colorB, 0.5);
+    }
+    public static Color combine(Color colorA, Color colorB, double splitForA){
+        double splitForB = 1-splitForA;
+        double red = Math.sqrt((colorA.red*colorA.red*splitForA)+(colorB.red*colorB.red*splitForB));
+        double green = Math.sqrt((colorA.green*colorA.green*splitForA)+(colorB.green*colorB.green*splitForB));
+        double blue = Math.sqrt((colorA.blue*colorA.blue*splitForA)+(colorB.blue*colorB.blue*splitForB));
+        //double alpha = Math.sqrt((colorA.alpha*colorA.alpha*splitForA)+(colorB.alpha*colorB.alpha*splitForB));
+        return new Color(red, green, blue, colorA.alpha);
+    }
+
+
+
+
     private final double red;
     private final double green;
     private final double blue;
@@ -66,22 +109,10 @@ public class Color implements IItemColor, IBlockColor {
         color += (int) (this.blue);
         return color;
     }
-    public static Color absCombine(Color colorA, Color colorB) {
-        return combine(colorA, colorB, 0.5);
-    }
-    public static Color combine(Color colorA, Color colorB, double splitForA){
-        double splitForB = 1-splitForA;
-        double red = Math.sqrt((colorA.red*colorA.red*splitForA)+(colorB.red*colorB.red*splitForB));
-        double green = Math.sqrt((colorA.green*colorA.green*splitForA)+(colorB.green*colorB.green*splitForB));
-        double blue = Math.sqrt((colorA.blue*colorA.blue*splitForA)+(colorB.blue*colorB.blue*splitForB));
-        //double alpha = Math.sqrt((colorA.alpha*colorA.alpha*splitForA)+(colorB.alpha*colorB.alpha*splitForB));
-        return new Color(red, green, blue, colorA.alpha);
-    }
     @Override
     public String toString(){
         return "a:"+alpha+",r:"+red+",g:"+green+",b:"+blue;
     }
-
 
 
 
