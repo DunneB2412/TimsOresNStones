@@ -13,27 +13,18 @@ import net.minecraft.client.resources.IResource;
 import javax.annotation.Nullable;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.util.Random;
 
 public class Color implements IItemColor, IBlockColor {
     public static Color extractColor(ResourceLocation resourceLocation){
-
-        try (Resource res = Minecraft.getMinecraft().getResourceManager().getResource(resourceLocation)) {
-            BufferedImage image = ImageIO.read(res.getInputSteram());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        try{
-            //String searchKey = "hex color code for"+title
+        Minecraft.getMinecraft().getTextureManager().
+        try (IResource res = Minecraft.getMinecraft().getResourceManager().getResource(resourceLocation)) {
+            BufferedImage image = ImageIO.read(res.getInputStream());
             int red=0;
             int green=0;
             int blue=0;
-            resourceLocation.getResourceDomain();
-            File imageFile = new File(resourceLocation.getResourcePath(),"image.png");
-            BufferedImage image = ImageIO.read(imageFile);
+            // do mad shiz
             return new Color(red, green, blue, 255);
         } catch (IOException e) {
             return Color.random(new Random(resourceLocation.hashCode()));
