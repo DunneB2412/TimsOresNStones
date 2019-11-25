@@ -4,6 +4,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.color.IBlockColor;
 import net.minecraft.client.renderer.color.IItemColor;
+import net.minecraft.client.renderer.texture.ITextureObject;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
@@ -17,8 +18,9 @@ import java.io.IOException;
 import java.util.Random;
 
 public class Color implements IItemColor, IBlockColor {
+
     public static Color extractColor(ResourceLocation resourceLocation){
-        Minecraft.getMinecraft().getTextureManager().
+
         try (IResource res = Minecraft.getMinecraft().getResourceManager().getResource(resourceLocation)) {
             BufferedImage image = ImageIO.read(res.getInputStream());
             int red=0;
