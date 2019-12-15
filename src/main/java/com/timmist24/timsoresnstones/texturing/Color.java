@@ -4,46 +4,53 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.color.IBlockColor;
 import net.minecraft.client.renderer.color.IItemColor;
-import net.minecraft.client.renderer.texture.ITextureObject;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
-import net.minecraft.client.resources.IResource;
 
 import javax.annotation.Nullable;
-import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
 import java.util.Random;
 
 public class Color implements IItemColor, IBlockColor {
 
-    public static Color extractColor(ResourceLocation resourceLocation){
-
-        try (IResource res = Minecraft.getMinecraft().getResourceManager().getResource(resourceLocation)) {
-            BufferedImage image = ImageIO.read(res.getInputStream());
-            int red=0;
-            int green=0;
-            int blue=0;
-            // do mad shiz
-            return new Color(red, green, blue, 255);
-        } catch (IOException e) {
-            return Color.random(new Random(resourceLocation.hashCode()));
+    public static Color extractColor(ItemStack stack, BufferedImage textureMap, int levle){
+        try {
+            TextureAtlasSprite sprite = Minecraft.getMinecraft().getRenderItem().getItemModelMesher().getParticleIcon(stack.getItem());
+            BufferedImage sub = textureMap.getSubimage(sprite.getOriginX()>>levle, sprite.getOriginY()>>levle, sprite.getIconWidth()>>levle, sprite.getIconHeight()>>levle);
+            Color out = new Color(0x00000000);
+            int counter = 0;
+            for(int pixle: sub.getRGB(0,0, sub.getWidth(), sub.getHeight(), new int[sub.getWidth()*sub.getHeight()], 0, sub.getWidth())){
+                Color pixleColor = new Color(pixle);
+                if (((pixle & 0xffffff)!=0) && ((pixle & 0xff000000)!=0)){// overall difference in rgb by 10, greigh filter, got inksack insted of lapiz(dye0), item border brakes texture
+                    if(counter <= 0){
+                        out = pixleColor;
+                    }else {
+                        out = absCombine(out, pixleColor);
+                    }
+                    counter++;
+                }
+            }
+            return out;
+        }catch (Throwable e){
+             return  Color.random(new Random(stack.hashCode()));
         }
     }
     public static Color absCombine(Color colorA, Color colorB) {
         return combine(colorA, colorB, 0.5);
     }
-    public static Color combine(Color colorA, Color colorB, double splitForA){
-        double splitForB = 1-splitForA;
-        double red = Math.sqrt((colorA.red*colorA.red*splitForA)+(colorB.red*colorB.red*splitForB));
-        double green = Math.sqrt((colorA.green*colorA.green*splitForA)+(colorB.green*colorB.green*splitForB));
-        double blue = Math.sqrt((colorA.blue*colorA.blue*splitForA)+(colorB.blue*colorB.blue*splitForB));
-        //double alpha = Math.sqrt((colorA.alpha*colorA.alpha*splitForA)+(colorB.alpha*colorB.alpha*splitForB));
-        return new Color(red, green, blue, colorA.alpha);
+    public static Color combine(Color colorA, Color colorB, double splitForA) {
+        double splitForB = 1 - splitForA;
+        double red = Math.sqrt((colorA.red * colorA.red * splitForA) + (colorB.red * colorB.red * splitForB));
+        double green = Math.sqrt((colorA.green * colorA.green * splitForA) + (colorB.green * colorB.green * splitForB));
+        double blue = Math.sqrt((colorA.blue * colorA.blue * splitForA) + (colorB.blue * colorB.blue * splitForB));
+        double alpha = colorA.alpha;
+        return new Color(red, green, blue, alpha*255);
     }
-
+    public static Color random(Random random) {
+        return new Color(random.nextInt(255), random.nextInt(255),random.nextInt(255), 255);
+    }
 
 
 
@@ -58,43 +65,11 @@ public class Color implements IItemColor, IBlockColor {
         this.blue = blue%256;
         this.alpha = (alpha%256)/255;
     }
+    public Color(int colorAsInt){this((colorAsInt >> 16) & 0xff, (colorAsInt >> 8) & 0xff , (colorAsInt) & 0xff, (colorAsInt >> 24) & 0xff);}
     public Color(double percentAlpha, Color color){ this(color.red, color.green, color.blue, (color.alpha*255)*percentAlpha/100);}
-    public Color(String hex) {
-        this(isValidHex(hex) ? getRgbaFromHexString(hex) :
-                getRgbaFromHexString("00000000"));
-    }
-    private Color(int[] rgba){
-        if(rgba.length==3){
-            alpha=1;
-            red = rgba[0];
-            green = rgba[1];
-            blue = rgba[2];
-        }else{
-            alpha = rgba[0];
-            red = rgba[1];
-            green = rgba[2];
-            blue = rgba[3];
-        }
-    }
-    private static int[] getRgbaFromHexString(String hex){
-        int[] out = new int[hex.length()/2];
-        for(int index = 0; index<out.length; index++){
-            int hexIndex = index*2;
-            String hexPart = (hex.charAt(hexIndex)+"")+(hex.charAt(hexIndex+1)+"");
-            out[index] = Integer.parseInt(hexPart, 16);
-        }
-        return  out;
-    }
-    private static boolean isValidHex(String hex){
-        return (hex.length()==6||hex.length()==8);
-    }
-
-    public static Color random(Random random) {
-        return new Color(random.nextInt(255), random.nextInt(255),random.nextInt(255), 255);
-    }
+    public Color(String hex) { this(Integer.parseInt(hex, 16));}
 
     public int toInt() {
-
         int color = 0;
         color += (int) (this.alpha * 255) <<24;
         color += (int) (this.red ) <<16;

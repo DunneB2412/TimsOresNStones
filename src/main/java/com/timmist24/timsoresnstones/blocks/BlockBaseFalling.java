@@ -10,6 +10,8 @@ import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 
+import java.util.Objects;
+
 public class BlockBaseFalling extends BlockFalling implements IHasModel {
 
     public BlockBaseFalling(String blockName, Material material) {
@@ -22,7 +24,7 @@ public class BlockBaseFalling extends BlockFalling implements IHasModel {
         this.blockSoundType = SoundType.GROUND;
 
         ModBlocks.BLOCKS.add(this);
-        ModItems.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
+        ModItems.ITEMS.add(new ItemBlock(this).setRegistryName(Objects.requireNonNull(this.getRegistryName())));
 
     }
 

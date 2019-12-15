@@ -37,10 +37,11 @@ public class MinerlaVariedItem extends Item implements IHasModel, IItemColor {
 
     private void prepareItemstacks() {
         for(Enum variant: variants) {
-            for(int i = 1; i< Mineral.numberOfMinerals(); i++){ // skips the empty dust
-                if(Arrays.asList(Mineral.getMineral(i).getType().getDustVariants(variants[0])).contains(variant)) {
-                    itemStacks.add(new ItemStack(this, 1, (i*10)+variant.ordinal()));
-                }
+            for(int i = 1; i< Mineral.numberOfMinerals(); i++){ // skips the empty mineral
+                itemStacks.add(new ItemStack(this, 1, (i*10)+variant.ordinal()));
+//                if(Arrays.asList(Mineral.getMineral(i).getType().getDustVariants(variants[0])).contains(variant)) {
+//                    itemStacks.add(new ItemStack(this, 1, (i*10)+variant.ordinal()));
+//                }
             }
         }
     }

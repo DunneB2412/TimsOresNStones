@@ -1,19 +1,18 @@
 package com.timmist24.timsoresnstones.items.materials.ore.mineral;
 
 import com.timmist24.timsoresnstones.TimsOresNStonesMain;
-import com.timmist24.timsoresnstones.texturing.Color;
 import com.timmist24.timsoresnstones.util.Util;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
-
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public enum InitMineralsMethod { // lots of work to be done in initalising minerals. first impliment assuming it works correctly
     BRUTE_FORCE(() -> {
+
         TimsOresNStonesMain.logger.warn("Tosm using brute force to retreve minerals");
         List<Mineral> mineralList = new ArrayList<>();
         List<String> oreDictTites = new ArrayList<>();
@@ -24,7 +23,6 @@ public enum InitMineralsMethod { // lots of work to be done in initalising miner
             }
         }
         Collection<Block> blocks = GameRegistry.findRegistry(Block.class).getValuesCollection();
-        //Collection<Item> items = GameRegistry.findRegistry(Item.class).getValuesCollection();
         String modBeingScanned = "";
         for (Block block: blocks){
             String blockAsString = block.toString();
@@ -45,33 +43,13 @@ public enum InitMineralsMethod { // lots of work to be done in initalising miner
                         matcher1 = Pattern.compile(".*\\[type=(\\w+).*").matcher(stateAsString);
                         Matcher matcher2 = Pattern.compile(".+:(\\w+)").matcher(stateAsString);
                         String mineralTitle = (matcher1.matches() ? matcher1.group(1) : matcher2.matches() ? matcher2.group(1) : stateAsString).replaceAll("_ore", "");
-                        MineralVariant mineralType = MineralVariant.CRYSTAL;//default
-                        Color mineralColor = Color.extractColor(Objects.requireNonNull(OreDictionary.getOres(oreDictTites.get(1) + "", true).get(0).getItem().getRegistryName()));//new Color("b7410e");
-                        int index = 0;
-                        boolean found = false;
-                        while(index<oreDictTites.size()&&!found){
-                            String dictionaryEntry = oreDictTites.get(index);
-                            if(Pattern.matches(Util.regexContainsPlus(new String[]{mineralTitle}), dictionaryEntry)){
-                                mineralType = MineralVariant.getFromString(dictionaryEntry.replaceAll(Util.regexFind(mineralTitle), ""));
-                                found = true;
-                                state.getBlock().getRegistryName();// maby do somehing
-                            }
-                            index++;
-                        }
-                        Mineral newMineral;
-                        if(mineralType != MineralVariant.METAL && mineralType != MineralVariant.LIQUID){
-                            newMineral = new Mineral(mineralTitle+"_alloy", MineralVariant.SYNTETIC, false, 10, 0, mineralColor, Color.combine(mineralColor, new Color("FFFFFF"), 0.20));
-                            if(!mineralList.contains(newMineral)) {
-                                mineralList.add(newMineral);
-                                newMinerals.add(mineralTitle);
-                            }
-                        }
-                        newMineral = new Mineral(mineralTitle, mineralType, false, 10, 0, mineralColor);
+
+                        Mineral newMineral = new Mineral(mineralTitle, false, 10, 0, block, list.indexOf(state));
 
                         foundMinerals.add(mineralTitle);
                         if(!mineralList.contains(newMineral)) {
                             mineralList.add(newMineral);
-                            newMinerals.add(mineralTitle);
+                            newMinerals.add(newMineral.toString());
                         }
                     }
                 }
