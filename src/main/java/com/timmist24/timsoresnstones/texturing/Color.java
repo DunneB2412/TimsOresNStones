@@ -5,6 +5,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.color.IBlockColor;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -14,29 +15,45 @@ import java.awt.image.BufferedImage;
 import java.util.Random;
 
 public class Color implements IItemColor, IBlockColor {
+    private static final int DEFAULT_TOLERANCE = 30;
 
-    public static Color extractColor(ItemStack stack, BufferedImage textureMap, int levle){
+    public static Color extractColor(Item item, int itemDammage, BufferedImage textureMap, int levle, Boolean useEntireTexture){
         try {
-            TextureAtlasSprite sprite = Minecraft.getMinecraft().getRenderItem().getItemModelMesher().getParticleIcon(stack.getItem());
+            TextureAtlasSprite sprite = Minecraft.getMinecraft().getRenderItem().getItemModelMesher().getParticleIcon(item, itemDammage);
             BufferedImage sub = textureMap.getSubimage(sprite.getOriginX()>>levle, sprite.getOriginY()>>levle, sprite.getIconWidth()>>levle, sprite.getIconHeight()>>levle);
-            Color out = new Color(0x00000000);
+            int red = 0;
+            int green = 0;
+            int blue = 0;
             int counter = 0;
+            Color firstPixleColor = new Color(sub.getRGB(0,0));
             for(int pixle: sub.getRGB(0,0, sub.getWidth(), sub.getHeight(), new int[sub.getWidth()*sub.getHeight()], 0, sub.getWidth())){
                 Color pixleColor = new Color(pixle);
-                if (((pixle & 0xffffff)!=0) && ((pixle & 0xff000000)!=0)){// overall difference in rgb by 10, greigh filter, got inksack insted of lapiz(dye0), item border brakes texture
-                    if(counter <= 0){
-                        out = pixleColor;
-                    }else {
-                        out = absCombine(out, pixleColor);
-                    }
+                if ((useEntireTexture||((pixle & 0xffffff)!=0) && ((pixle & 0xff000000)!=0)&&!similerColors(firstPixleColor, pixleColor))){
+                    red+=pixleColor.red;
+                    green+=pixleColor.green;
+                    blue+=pixleColor.blue;
                     counter++;
                 }
             }
-            return out;
+            return new Color(red/counter, green/counter, blue/counter, 255);
         }catch (Throwable e){
-             return  Color.random(new Random(stack.hashCode()));
+            return  Color.random(new Random());
         }
     }
+
+    private static boolean similerColors(Color colorA, Color colorB) {
+        int difARG = (int) Math.abs(colorA.red-colorA.green);
+        int difBRG = (int) Math.abs(colorB.red-colorB.green);
+        int difARB = (int) Math.abs(colorA.red-colorA.blue);
+        int difBRB = (int) Math.abs(colorB.red-colorB.blue);
+        int difAGB = (int) Math.abs(colorA.green-colorA.blue);
+        int difBGB = (int) Math.abs(colorB.green-colorB.blue);
+
+        return Math.abs(difARG-difBRG) < Color.DEFAULT_TOLERANCE &&
+                (Math.abs(difARB-difBRB) < Color.DEFAULT_TOLERANCE &&
+                        (Math.abs(difAGB-difBGB) < Color.DEFAULT_TOLERANCE));
+    }
+
     public static Color absCombine(Color colorA, Color colorB) {
         return combine(colorA, colorB, 0.5);
     }

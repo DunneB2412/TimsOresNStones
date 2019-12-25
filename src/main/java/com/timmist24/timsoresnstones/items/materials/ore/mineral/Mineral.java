@@ -2,14 +2,12 @@ package com.timmist24.timsoresnstones.items.materials.ore.mineral;
 
 import com.timmist24.timsoresnstones.texturing.Color;
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.NonNullList;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
@@ -51,13 +49,15 @@ public class Mineral implements Comparable<Mineral>{
         bufferedImage.setRGB(0,0, width, height, rgbArray, 0, width);
 
         for(Mineral mineral: MINERALS){
-            Color color = Color.extractColor(mineral.parent.getItemDropped(mineral.parent.getBlockState().getValidStates().get(mineral.parentsMeta),RANDOM,0).getDefaultInstance(), bufferedImage, levle); ///
+            IBlockState state = mineral.parent.getBlockState().getValidStates().get(mineral.parentsMeta);
+            Item itemDropped = mineral.parent.getItemDropped(state,RANDOM,0) ;
+            int itemDammage = mineral.parent.damageDropped(state);
+            Color color = Color.extractColor(itemDropped, itemDammage, bufferedImage, levle, mineral.equals(MINERALS.get(0)));
             setMineralValues(mineral, MineralVariant.METAL, color, Color.combine(color, new Color("aaaaaa"), 0.75));
         }
     }
 
     private static void setMineralValues(Mineral mineral, MineralVariant type, Color... colors) {
-        //new Color("b7410e");
         mineral.colors = colors;
         mineral.type = type;
     }
@@ -80,19 +80,19 @@ public class Mineral implements Comparable<Mineral>{
         this.parentsMeta = meta;
     }
 
-    public boolean isOilSoluble() {
-        if(unstability>UNSTABILITY_OIL_THRESHOLD){
-            return RANDOM.nextBoolean();
-        }
-        return isOilSoluble;
-    }
-    public float getWeightPerUnit() {
-        float randomChange = RANDOM.nextFloat()*WEIGHT_FACTOR;
-        if(RANDOM.nextBoolean()){
-            return weightPerUnit+randomChange;
-        }
-        return weightPerUnit- randomChange;
-    }
+//    public boolean isOilSoluble() {
+//        if(unstability>UNSTABILITY_OIL_THRESHOLD){
+//            return RANDOM.nextBoolean();
+//        }
+//        return isOilSoluble;
+//    }
+//    public float getWeightPerUnit() {
+//        float randomChange = RANDOM.nextFloat()*WEIGHT_FACTOR;
+//        if(RANDOM.nextBoolean()){
+//            return weightPerUnit+randomChange;
+//        }
+//        return weightPerUnit- randomChange;
+//    }
     public MineralVariant getType() {
         return type;
     }
