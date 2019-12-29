@@ -48,10 +48,12 @@ public class Color implements IItemColor, IBlockColor {
         int difBRB = (int) Math.abs(colorB.red-colorB.blue);
         int difAGB = (int) Math.abs(colorA.green-colorA.blue);
         int difBGB = (int) Math.abs(colorB.green-colorB.blue);
+        int difAAB = (int) Math.abs(colorA.alpha-colorB.alpha);
 
         return Math.abs(difARG-difBRG) < Color.DEFAULT_TOLERANCE &&
                 (Math.abs(difARB-difBRB) < Color.DEFAULT_TOLERANCE &&
-                        (Math.abs(difAGB-difBGB) < Color.DEFAULT_TOLERANCE));
+                        (Math.abs(difAGB-difBGB) < Color.DEFAULT_TOLERANCE)&&
+                        difAAB<DEFAULT_TOLERANCE);
     }
 
     public static Color absCombine(Color colorA, Color colorB) {
