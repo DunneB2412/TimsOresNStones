@@ -1,5 +1,8 @@
 package com.timmist24.timsoresnstones.texturing;
 
+import com.timmist24.timsoresnstones.TimsOresNStonesMain;
+import com.timmist24.timsoresnstones.util.GuiClass;
+import com.timmist24.timsoresnstones.util.TestGui;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.color.IBlockColor;
@@ -12,6 +15,7 @@ import net.minecraft.world.IBlockAccess;
 
 import javax.annotation.Nullable;
 import java.awt.image.BufferedImage;
+import java.util.Arrays;
 import java.util.Random;
 
 public class Color implements IItemColor, IBlockColor {
@@ -19,24 +23,42 @@ public class Color implements IItemColor, IBlockColor {
 
     public static Color extractColor(Item item, int itemDammage, BufferedImage textureMap, int levle, Boolean useEntireTexture){
         try {
+            //Thread test = new GuiClass();
+            //test.start();
             TextureAtlasSprite sprite = Minecraft.getMinecraft().getRenderItem().getItemModelMesher().getParticleIcon(item, itemDammage);
             BufferedImage sub = textureMap.getSubimage(sprite.getOriginX()>>levle, sprite.getOriginY()>>levle, sprite.getIconWidth()>>levle, sprite.getIconHeight()>>levle);
             int red = 0;
             int green = 0;
             int blue = 0;
             int counter = 0;
+            int[] pixle100x100 = new int[100*100];
             Color firstPixleColor = new Color(sub.getRGB(0,0));
+            BufferedImage pixleDebug = new BufferedImage(200,100,2);
+
+            Arrays.fill(pixle100x100, sub.getRGB(0,0));
+
+            pixleDebug.setRGB(0,0,100, 100, pixle100x100, 0, pixleDebug.getHeight());
+
             for(int pixle: sub.getRGB(0,0, sub.getWidth(), sub.getHeight(), new int[sub.getWidth()*sub.getHeight()], 0, sub.getWidth())){
                 Color pixleColor = new Color(pixle);
-                if ((useEntireTexture||((pixle & 0xffffff)!=0) && ((pixle & 0xff000000)!=0)&&!similerColors(firstPixleColor, pixleColor))){
+
+                Arrays.fill(pixle100x100, pixle);
+                pixleDebug.setRGB(100,0,100, 100, pixle100x100, 0, pixleDebug.getHeight());
+
+
+                boolean notSimiler = !similerColors(firstPixleColor, pixleColor);
+                if (useEntireTexture||(((pixle)!=0) && notSimiler)){
                     red+=pixleColor.red;
                     green+=pixleColor.green;
                     blue+=pixleColor.blue;
                     counter++;
                 }
+
             }
+
             return new Color(red/counter, green/counter, blue/counter, 255);
         }catch (Throwable e){
+            TimsOresNStonesMain.logger.error("Failed to extract color from "+item.getUnlocalizedName()+". Because of "+e.toString()+". Retruning a random collor");
             return  Color.random(new Random());
         }
     }
@@ -48,12 +70,23 @@ public class Color implements IItemColor, IBlockColor {
         int difBRB = (int) Math.abs(colorB.red-colorB.blue);
         int difAGB = (int) Math.abs(colorA.green-colorA.blue);
         int difBGB = (int) Math.abs(colorB.green-colorB.blue);
-        int difAAB = (int) Math.abs(colorA.alpha-colorB.alpha);
+
+        int difAA = (int) Math.abs(colorA.alpha-colorB.alpha);
+        int difRR = (int) Math.abs(colorA.red-colorB.red);
+        int difGG = (int) Math.abs(colorA.green-colorB.green);
+        int difBB = (int) Math.abs(colorA.blue-colorB.blue);
+
+        boolean test1 = Math.abs(difARG-difBRG) < Color.DEFAULT_TOLERANCE;
+        boolean test2 = Math.abs(difARB-difBRB) < Color.DEFAULT_TOLERANCE;
+        boolean test3 = Math.abs(difAGB-difBGB) < Color.DEFAULT_TOLERANCE;
 
         return Math.abs(difARG-difBRG) < Color.DEFAULT_TOLERANCE &&
                 (Math.abs(difARB-difBRB) < Color.DEFAULT_TOLERANCE &&
                         (Math.abs(difAGB-difBGB) < Color.DEFAULT_TOLERANCE)&&
-                        difAAB<DEFAULT_TOLERANCE);
+                        difAA<DEFAULT_TOLERANCE/100);/* &&
+                        difRR<DEFAULT_TOLERANCE*50&&
+                        difGG<DEFAULT_TOLERANCE*50&&
+                        difBB<DEFAULT_TOLERANCE*50);*/
     }
 
     public static Color absCombine(Color colorA, Color colorB) {
