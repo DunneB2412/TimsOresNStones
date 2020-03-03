@@ -50,10 +50,11 @@ public class Mineral implements Comparable<Mineral>{
 
         for(Mineral mineral: MINERALS){
             IBlockState state = mineral.parent.getBlockState().getValidStates().get(mineral.parentsMeta);
+            Item test = Item.getItemFromBlock(mineral.parent);
             Item itemDropped = mineral.parent.getItemDropped(state,RANDOM,0) ;
             int itemDammage = mineral.parent.damageDropped(state);
-            Color color = Color.extractColor(itemDropped, itemDammage, bufferedImage, levle, mineral.equals(MINERALS.get(0)));
-            setMineralValues(mineral, MineralVariant.METAL, color, Color.combine(color, new Color("aaaaaa"), 0.75));
+            Color color = Color.extractColor(test, mineral.parentsMeta, bufferedImage, levle, mineral.equals(MINERALS.get(0)));
+            setMineralValues(mineral, MineralVariant.METAL, color, color);
         }
     }
 
@@ -65,19 +66,21 @@ public class Mineral implements Comparable<Mineral>{
 
     public final String title;
     public Color[] colors;
-    private final int unstability;
+    private final int unsuitability;
     private MineralVariant type;
     private final boolean isOilSoluble;
     private final float weightPerUnit;
+    private final byte specialProperties; //0xFF00 -> strength, 0x00FF ->rate
     private final Block parent;
     private final int parentsMeta;
-    Mineral(String title, boolean isOilSoluble, float weightPerUnit, int unstability, Block block, int meta){
+    Mineral(String title, boolean isOilSoluble, float weightPerUnit, int unsuitability, Block block, int meta){
         this.title = title;
-        this.unstability = unstability;
+        this.unsuitability = unsuitability;
         this.isOilSoluble = isOilSoluble;
         this.weightPerUnit = weightPerUnit;
         this.parent = block;
         this.parentsMeta = meta;
+        specialProperties = 0;
     }
 
 //    public boolean isOilSoluble() {

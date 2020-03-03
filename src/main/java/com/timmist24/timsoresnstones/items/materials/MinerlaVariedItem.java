@@ -1,7 +1,5 @@
 package com.timmist24.timsoresnstones.items.materials;
 
-
-import com.google.common.collect.Lists;
 import com.timmist24.timsoresnstones.TimsOresNStonesMain;
 import com.timmist24.timsoresnstones.init.ModItems;
 import com.timmist24.timsoresnstones.items.materials.ore.mineral.Mineral;
@@ -17,7 +15,6 @@ import net.minecraft.util.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class MinerlaVariedItem extends Item implements IHasModel, IItemColor {

@@ -39,8 +39,9 @@ public enum InitMineralsMethod { // lots of work to be done in initalising miner
                 List<String> newMinerals = new ArrayList<>();
                 for (IBlockState state : list) {
                     String stateAsString = state.toString();
-                    if(Pattern.matches(Util.regexContainsPlus(new String[]{"ore"}), stateAsString)){
-                        matcher1 = Pattern.compile(".*\\[type=(\\w+).*").matcher(stateAsString);
+                    if(Pattern.matches(Util.regexContainsPlus(new String[]{"ore"}), stateAsString)//){
+                        && !Pattern.matches(Util.regexContainsPlus(new String[]{"ore_fluid"}), stateAsString)){
+                        matcher1 = Pattern.compile(".*\\[type=(\\w+).*").matcher(stateAsString);//thaumcraft uses ore_name, not handled here
                         Matcher matcher2 = Pattern.compile(".+:(\\w+)").matcher(stateAsString);
                         String mineralTitle = (matcher1.matches() ? matcher1.group(1) : matcher2.matches() ? matcher2.group(1) : stateAsString).replaceAll("_ore", "");
 
@@ -70,12 +71,4 @@ public enum InitMineralsMethod { // lots of work to be done in initalising miner
         return method;
     }
 
-//    public static InitMineralsMethod get(String target){
-//        switch (target){
-//            default:
-//                return BRUTE_FORCE;
-//            case "json_files":
-//                return JSON_FILES;
-//        }
-//    }
 }

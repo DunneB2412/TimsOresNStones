@@ -6,11 +6,12 @@ import com.timmist24.timsoresnstones.items.materials.ore.OreVariant;
 
 
 public enum MineralVariant {
+    STONE(DustVariant.values(), OreVariant.values(), PartVariant.values()),
     METAL(DustVariant.values(), OreVariant.values(), PartVariant.values()),
     GEM(DustVariant.values(), OreVariant.values(),new PartVariant[]{}),
     CRYSTAL(DustVariant.values(), OreVariant.values(), new PartVariant[]{}),
     LIQUID(new DustVariant[]{}, new OreVariant[]{OreVariant.PIECE, OreVariant.CHUNK}, new PartVariant[]{}),
-    SYNTETIC(DustVariant.values(), new OreVariant[]{},PartVariant.values());
+    SYNTHETIC(DustVariant.values(), new OreVariant[]{},PartVariant.values());
 
     private final DustVariant[] dustVariants;
     private final OreVariant[] oreVariants;
@@ -21,7 +22,7 @@ public enum MineralVariant {
         this.partVariants = partVariants;
     }
 
-    public Enum[] getDustVariants(Enum targetEnum) {
+    public Enum[] getVariants(Enum targetEnum) {
         if(targetEnum.getClass()==DustVariant.class){
             return this.dustVariants;
         }
@@ -34,6 +35,8 @@ public enum MineralVariant {
     @Override
     public String toString() {
         switch (this){
+            case STONE:
+                return "stone";
             case METAL:
                 return "ingot";
             case GEM:
@@ -42,22 +45,13 @@ public enum MineralVariant {
                 return "crystal";
             case LIQUID:
                 return "liquid";
-            case SYNTETIC:
+            case SYNTHETIC:
                 return "alloy";
             default:
                 return super.toString();
         }
     }
     public static MineralVariant getFromString(String key){
-        switch (key){
-            case "ingot":
-                return MineralVariant.METAL;
-            case "gem":
-                return MineralVariant.GEM;
-            case "liquid":
-                return MineralVariant.LIQUID;
-            default:
-                return MineralVariant.CRYSTAL;
-        }
+        return MineralVariant.valueOf(key.toUpperCase());
     }
 }
