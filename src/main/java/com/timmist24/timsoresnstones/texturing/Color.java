@@ -14,7 +14,7 @@ import java.util.Random;
 public class Color {
     private static final int DEFAULT_TOLERANCE = 30;
 //    private static final List<Image> ORE_OVERLAYS = new ArrayList<>();// establish known ore patterns and stone textures first
-//    private static final List<Image> GROUND_IMAGES = new ArrayList<>();
+//    private static final List<Image> GROUND_IMAGES = new ArrayList<>();// can be pre initalised bylist of ground minerals
 
     public static Color extractColor(Item item, int itemDamage, BufferedImage textureMap, int level, Boolean useEntireTexture){// filter damaged for {glowstone?, quartz, benitoite, ardite
         try {
@@ -114,16 +114,16 @@ public class Color {
         return new Color(random.nextInt(255), random.nextInt(255),random.nextInt(255), 255);
     }
 
-    private final byte red;
-    private final byte green;
-    private final byte blue;
-    private final byte alpha;
+    private final int red;
+    private final int green;
+    private final int blue;
+    private final int alpha;
 
     public Color(double red, double green, double blue, double alpha) {
-        this.red = (byte) (red%256);
-        this.green = (byte) (green%256);
-        this.blue = (byte) (blue%256);
-        this.alpha = (byte) (alpha%256);
+        this.red = (int) (red%256);
+        this.green = (int) (green%256);
+        this.blue = (int) (blue%256);
+        this.alpha = (int) (alpha%256);
     }
     public Color(int colorAsInt){this((colorAsInt >> 16) & 0xff, (colorAsInt >> 8) & 0xff , (colorAsInt) & 0xff, (colorAsInt >> 24) & 0xff);}
     public Color(String hex) { this(Integer.parseInt(hex, 16));}

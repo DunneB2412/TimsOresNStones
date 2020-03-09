@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
 public enum InitMineralsMethod { // lots of work to be done in initalising minerals. first impliment assuming it works correctly
     BRUTE_FORCE(() -> {
 
-        TimsOresNStonesMain.logger.warn("Tosm using brute force to retreve minerals");
+        TimsOresNStonesMain.logger.warn("Tosm using brute force to retreve minerals");// look for stones sand, gravle, clay, (make a silt) netherstone, endStone (dried variants, bricks ect) add stable memory of minerals somewhere to handle updates to minerals list
         List<Mineral> mineralList = new ArrayList<>();
         List<String> oreDictTites = new ArrayList<>();
         String[] names = OreDictionary.getOreNames();
@@ -35,16 +35,16 @@ public enum InitMineralsMethod { // lots of work to be done in initalising miner
             }
             if(Pattern.matches("Block"+ Util.regexContainsPlus(new String[]{"ore", "resource"}), blockAsString)) {
                 List<IBlockState> list = block.getBlockState().getValidStates();
-                List<String> foundMinerals = new ArrayList<>();
+                List<String> foundMinerals = new ArrayList<>();// filyrt out lit variants
                 List<String> newMinerals = new ArrayList<>();
                 for (IBlockState state : list) {
                     String stateAsString = state.toString();
                     if(Pattern.matches(Util.regexContainsPlus(new String[]{"ore"}), stateAsString)//){
                         && !Pattern.matches(Util.regexContainsPlus(new String[]{"ore_fluid"}), stateAsString)){
-                        matcher1 = Pattern.compile(".*\\[type=(\\w+).*").matcher(stateAsString);//thaumcraft uses ore_name, not handled here
+                        matcher1 = Pattern.compile(".*\\[type=(\\w+).*").matcher(stateAsString);//thaumcraft uses ore_name, big reactors uses orename,ae2(quartz nor really handled) (not handled here), look for unlocalised name (draconic name is here)
                         Matcher matcher2 = Pattern.compile(".+:(\\w+)").matcher(stateAsString);
                         String mineralTitle = (matcher1.matches() ? matcher1.group(1) : matcher2.matches() ? matcher2.group(1) : stateAsString).replaceAll("_ore", "");
-
+                        //GET HARDNESS FOR MINERAL
                         Mineral newMineral = new Mineral(mineralTitle, false, 10, 0, block, list.indexOf(state));
 
                         foundMinerals.add(mineralTitle);
