@@ -7,10 +7,11 @@ import com.timmist24.timsoresnstones.items.materials.ore.OreVariant;
 
 public enum MineralVariant {
     METAL(DustVariant.values(), OreVariant.values(), PartVariant.values()),
-    GEM(DustVariant.values(), OreVariant.values(),new PartVariant[]{}),
-    CRYSTAL(DustVariant.values(), OreVariant.values(), new PartVariant[]{}),
-    LIQUID(new DustVariant[]{}, new OreVariant[]{OreVariant.PIECE, OreVariant.CHUNK}, new PartVariant[]{}),
-    SYNTETIC(DustVariant.values(), new OreVariant[]{},PartVariant.values());
+    CERAMIC(DustVariant.values(), OreVariant.values(),new PartVariant[]{}),
+    ORGANIC(DustVariant.values(), OreVariant.values(), new PartVariant[]{}),
+    CHEMICAL(DustVariant.values(), OreVariant.values(), new PartVariant[]{}),
+    POLYMER(new DustVariant[]{}, new OreVariant[]{OreVariant.PIECE, OreVariant.CHUNK}, new PartVariant[]{}),
+    COMPOSITE(DustVariant.values(), new OreVariant[]{},PartVariant.values());
 
     private final DustVariant[] dustVariants;
     private final OreVariant[] oreVariants;
@@ -33,31 +34,32 @@ public enum MineralVariant {
 
     @Override
     public String toString() {
-        switch (this){
-            case METAL:
-                return "ingot";
-            case GEM:
-                return "gem";
-            case CRYSTAL:
-                return "crystal";
-            case LIQUID:
-                return "liquid";
-            case SYNTETIC:
-                return "alloy";
-            default:
-                return super.toString();
-        }
+        return "Working progress:"+this.name();
+//        switch (this){
+//            case METAL:
+//                return "ingot";
+//            case CERAMIC:
+//                return "gem";
+//            case ORGANIC:
+//                return "crystal";
+//            case POLYMER:
+//                return "liquid";
+//            case COMPOSITE:
+//                return "alloy";
+//            default:
+//                return super.toString();
+//        }
     }
     public static MineralVariant getFromString(String key){
         switch (key){
             case "ingot":
                 return MineralVariant.METAL;
             case "gem":
-                return MineralVariant.GEM;
+                return MineralVariant.CERAMIC;
             case "liquid":
-                return MineralVariant.LIQUID;
+                return MineralVariant.POLYMER;
             default:
-                return MineralVariant.CRYSTAL;
+                return MineralVariant.ORGANIC;
         }
     }
 }
