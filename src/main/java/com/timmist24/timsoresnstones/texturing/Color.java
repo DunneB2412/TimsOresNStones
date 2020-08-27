@@ -1,98 +1,106 @@
 package com.timmist24.timsoresnstones.texturing;
 
 import com.timmist24.timsoresnstones.TimsOresNStonesMain;
-import com.timmist24.timsoresnstones.util.GuiClass;
-import com.timmist24.timsoresnstones.util.TestGui;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.color.IBlockColor;
-import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockAccess;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nullable;
 import java.awt.image.BufferedImage;
 import java.util.Arrays;
 import java.util.Random;
 
-public class Color implements IItemColor, IBlockColor {
+public class Color {
     private static final int DEFAULT_TOLERANCE = 30;
+//    private static final List<Image> ORE_OVERLAYS = new ArrayList<>();// establish known ore patterns and stone textures first
+//    private static final List<Image> GROUND_IMAGES = new ArrayList<>();// can be pre initalised bylist of ground minerals
 
-    public static Color extractColor(Item item, int itemDammage, BufferedImage textureMap, int levle, Boolean useEntireTexture){
+    public static Color extractColor(Item item, int itemDamage, BufferedImage textureMap, int level, Boolean useEntireTexture){// filter damaged for {glowstone?, quartz, benitoite, ardite
         try {
-            //Thread test = new GuiClass();
-            //test.start();
-            TextureAtlasSprite sprite = Minecraft.getMinecraft().getRenderItem().getItemModelMesher().getParticleIcon(item, itemDammage);
-            BufferedImage sub = textureMap.getSubimage(sprite.getOriginX()>>levle, sprite.getOriginY()>>levle, sprite.getIconWidth()>>levle, sprite.getIconHeight()>>levle);
+            TextureAtlasSprite sprite = Minecraft.getMinecraft().getRenderItem().getItemModelMesher().getParticleIcon(item, itemDamage);
+            BufferedImage sub = textureMap.getSubimage(sprite.getOriginX()>>level, sprite.getOriginY()>>level, sprite.getIconWidth()>>level, sprite.getIconHeight()>>level);
             int red = 0;
             int green = 0;
             int blue = 0;
             int counter = 0;
-            int[] pixle100x100 = new int[100*100];
-            Color firstPixleColor = new Color(sub.getRGB(0,0));
+            int[] pixel100x100 = new int[100*100];
+            Color firstPixelColor = new Color(sub.getRGB(0,0));
             BufferedImage pixleDebug = new BufferedImage(200,100,2);
 
-            Arrays.fill(pixle100x100, sub.getRGB(0,0));
+            Arrays.fill(pixel100x100, sub.getRGB(0,0));
 
-            pixleDebug.setRGB(0,0,100, 100, pixle100x100, 0, pixleDebug.getHeight());
+            pixleDebug.setRGB(0,0,100, 100, pixel100x100, 0, pixleDebug.getHeight());
 
-            for(int pixle: sub.getRGB(0,0, sub.getWidth(), sub.getHeight(), new int[sub.getWidth()*sub.getHeight()], 0, sub.getWidth())){
-                Color pixleColor = new Color(pixle);
+            for(int pixel: sub.getRGB(0,0, sub.getWidth(), sub.getHeight(), new int[sub.getWidth()*sub.getHeight()], 0, sub.getWidth())){
+                Color pileColor = new Color(pixel);
 
-                Arrays.fill(pixle100x100, pixle);
-                pixleDebug.setRGB(100,0,100, 100, pixle100x100, 0, pixleDebug.getHeight());
+                Arrays.fill(pixel100x100, pixel);
+                pixleDebug.setRGB(100,0,100, 100, pixel100x100, 0, pixleDebug.getHeight());
 
 
-                boolean notSimiler = !similerColors(firstPixleColor, pixleColor);
-                if (useEntireTexture||(((pixle)!=0) && notSimiler)){
-                    red+=pixleColor.red;
-                    green+=pixleColor.green;
-                    blue+=pixleColor.blue;
+                boolean notSimilar = !similarColors(firstPixelColor, pileColor);
+                if (useEntireTexture||(((pixel)!=0) && notSimilar)){
+                    red+=pileColor.red;
+                    green+=pileColor.green;
+                    blue+=pileColor.blue;
                     counter++;
                 }
 
             }
 
-            return new Color(red/counter, green/counter, blue/counter, 255);
+            return new Color((float)red/counter, (float)green/counter, (float)blue/counter, 255);
         }catch (Throwable e){
-            TimsOresNStonesMain.logger.error("Failed to extract color from "+item.getUnlocalizedName()+". Because of "+e.toString()+". Retruning a random collor");
-            return  Color.random(new Random());
+            TimsOresNStonesMain.logger.error("Failed to extract color from "+item.getUnlocalizedName()+". Because of "+e.toString()+". Retuning a random color");
+            return  Color.random(new Random());//thorium, boron, lithium, magnesium
         }
     }
+    @Contract(pure = true)
+    public static boolean similarColors(@NotNull Color colorA, @NotNull Color colorB) {
+        int difARG = Math.abs(colorA.red-colorA.green);
+        int difBRG = Math.abs(colorB.red-colorB.green);
 
-    private static boolean similerColors(Color colorA, Color colorB) {
-        int difARG = (int) Math.abs(colorA.red-colorA.green);
-        int difBRG = (int) Math.abs(colorB.red-colorB.green);
-        int difARB = (int) Math.abs(colorA.red-colorA.blue);
-        int difBRB = (int) Math.abs(colorB.red-colorB.blue);
-        int difAGB = (int) Math.abs(colorA.green-colorA.blue);
-        int difBGB = (int) Math.abs(colorB.green-colorB.blue);
+        int difARB = Math.abs(colorA.red-colorA.blue);
+        int difBRB = Math.abs(colorB.red-colorB.blue);
 
-        int difAA = (int) Math.abs(colorA.alpha-colorB.alpha);
-        int difRR = (int) Math.abs(colorA.red-colorB.red);
-        int difGG = (int) Math.abs(colorA.green-colorB.green);
-        int difBB = (int) Math.abs(colorA.blue-colorB.blue);
+        int difAGB = Math.abs(colorA.green-colorA.blue);
+        int difBGB = Math.abs(colorB.green-colorB.blue);
 
-        boolean test1 = Math.abs(difARG-difBRG) < Color.DEFAULT_TOLERANCE;
-        boolean test2 = Math.abs(difARB-difBRB) < Color.DEFAULT_TOLERANCE;
-        boolean test3 = Math.abs(difAGB-difBGB) < Color.DEFAULT_TOLERANCE;
+        int difAA = Math.abs(colorA.alpha-colorB.alpha);
+        int difRR = Math.abs(colorA.red-colorB.red);
+        int difGG = Math.abs(colorA.green-colorB.green);
+        int difBB = Math.abs(colorA.blue-colorB.blue);
 
-        return Math.abs(difARG-difBRG) < Color.DEFAULT_TOLERANCE &&
-                (Math.abs(difARB-difBRB) < Color.DEFAULT_TOLERANCE &&
-                        (Math.abs(difAGB-difBGB) < Color.DEFAULT_TOLERANCE)&&
-                        difAA<DEFAULT_TOLERANCE/100);/* &&
-                        difRR<DEFAULT_TOLERANCE*50&&
-                        difGG<DEFAULT_TOLERANCE*50&&
-                        difBB<DEFAULT_TOLERANCE*50);*/
+
+        boolean test0 = difAA<=DEFAULT_TOLERANCE/2;
+        boolean test1 = Math.abs(difARG-difBRG) <= Color.DEFAULT_TOLERANCE;
+        boolean test2 = Math.abs(difARB-difBRB) <= Color.DEFAULT_TOLERANCE;
+        boolean test3 = Math.abs(difAGB-difBGB) <= Color.DEFAULT_TOLERANCE;
+
+        boolean test4 = difRR <= DEFAULT_TOLERANCE*2;
+        boolean test5 = difGG <= DEFAULT_TOLERANCE*2;
+        boolean test6 = difBB <= DEFAULT_TOLERANCE*2;
+
+        return test0&&test1&&test2&&test3&&test4&&test5&&test6;
     }
 
+//    @NotNull
+//    @Contract(value = "_ -> new", pure = true)
+//    public static Color greighScale(@NotNull Color color){
+//        float avrage = (float) ((color.red+color.green+color.blue)/3);
+//        return new Color(avrage,avrage,avrage);
+//    }
+    @NotNull
+    @Contract(value = "_, _ -> new", pure = true)
     public static Color absCombine(Color colorA, Color colorB) {
         return combine(colorA, colorB, 0.5);
     }
-    public static Color combine(Color colorA, Color colorB, double splitForA) {
+    @NotNull
+    @Contract(value = "_, _, _ -> new", pure = true)
+    public static Color combine(@NotNull Color colorA, @NotNull Color colorB, double splitForA) {
+        if(splitForA<0){
+            return absCombine(colorA,colorB);
+        }
         double splitForB = 1 - splitForA;
         double red = Math.sqrt((colorA.red * colorA.red * splitForA) + (colorB.red * colorB.red * splitForB));
         double green = Math.sqrt((colorA.green * colorA.green * splitForA) + (colorB.green * colorB.green * splitForB));
@@ -100,53 +108,37 @@ public class Color implements IItemColor, IBlockColor {
         double alpha = colorA.alpha;
         return new Color(red, green, blue, alpha*255);
     }
-    public static Color random(Random random) {
+    @NotNull
+    @Contract("_ -> new")
+    public static Color random(@NotNull Random random) {
         return new Color(random.nextInt(255), random.nextInt(255),random.nextInt(255), 255);
     }
 
-
-
-    private final double red;
-    private final double green;
-    private final double blue;
-    private final double alpha;
+    private final int red;
+    private final int green;
+    private final int blue;
+    private final int alpha;
 
     public Color(double red, double green, double blue, double alpha) {
-        this.red = red%256;
-        this.green = green%256;
-        this.blue = blue%256;
-        this.alpha = (alpha%256)/255;
+        this.red = (int) (red%256);
+        this.green = (int) (green%256);
+        this.blue = (int) (blue%256);
+        this.alpha = (int) (alpha%256);
     }
     public Color(int colorAsInt){this((colorAsInt >> 16) & 0xff, (colorAsInt >> 8) & 0xff , (colorAsInt) & 0xff, (colorAsInt >> 24) & 0xff);}
-    public Color(double percentAlpha, Color color){ this(color.red, color.green, color.blue, (color.alpha*255)*percentAlpha/100);}
     public Color(String hex) { this(Integer.parseInt(hex, 16));}
+    public Color(double red, double green, double blue){ this(red,green,blue,255); }
 
     public int toInt() {
         int color = 0;
-        color += (int) (this.alpha * 255) <<24;
-        color += (int) (this.red ) <<16;
-        color += (int) (this.green ) <<8;
-        color += (int) (this.blue);
+        color += (this.alpha) <<24;
+        color += (this.red ) <<16;
+        color += (this.green ) <<8;
+        color += this.blue;
         return color;
     }
     @Override
     public String toString(){
         return "a:"+alpha+",r:"+red+",g:"+green+",b:"+blue;
-    }
-
-
-
-    /**
-     * should tale over local handlers
-     * unimplimented yet
-     */
-    @Override
-    public int colorMultiplier(IBlockState state, @Nullable IBlockAccess worldIn, @Nullable BlockPos pos, int tintIndex) {
-        return 0;
-    }
-
-    @Override
-    public int colorMultiplier(ItemStack stack, int tintIndex) {
-        return 0;
     }
 }

@@ -51,15 +51,6 @@ public enum MineralVariant {
 //        }
     }
     public static MineralVariant getFromString(String key){
-        switch (key){
-            case "ingot":
-                return MineralVariant.METAL;
-            case "gem":
-                return MineralVariant.CERAMIC;
-            case "liquid":
-                return MineralVariant.POLYMER;
-            default:
-                return MineralVariant.ORGANIC;
-        }
+        return MineralVariant.valueOf(key.toUpperCase());
     }
 }
