@@ -1,10 +1,10 @@
 package com.timmist24.timsoresnstones.init.recipies;
 
-import com.timmist24.timsoresnstones.items.materials.ore.OrePiece;
+import com.timmist24.timsoresnstones.items.materials.base.ore.OrePieceItem;
 import net.minecraft.item.Item;
 
 public class ModRecipies {
-    private static Item[] filter(OrePiece itemin, float power, FiltrationMethods filtrationMethod){
+    private static Item[] filter(OrePieceItem itemin, float power, FiltrationMethods filtrationMethod){
         return filtrationMethod.getFunction().filter(itemin, power);
     }
     public static void init(){
@@ -14,7 +14,7 @@ public class ModRecipies {
         //GameRegistry.do stuff
         Test test = new Test() {
             @Override
-            public Item[] filter(OrePiece itemIn, Float strength) {
+            public Item[] filter(OrePieceItem itemIn, Float strength) {
                 return new Item[0];
             }
         };

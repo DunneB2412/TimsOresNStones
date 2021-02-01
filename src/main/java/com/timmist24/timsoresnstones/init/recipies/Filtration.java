@@ -1,8 +1,8 @@
 package com.timmist24.timsoresnstones.init.recipies;
 
-import com.timmist24.timsoresnstones.items.materials.ore.OrePiece;
+import com.timmist24.timsoresnstones.items.materials.base.ore.OrePieceItem;
 import net.minecraft.item.Item;
 
 public interface Filtration {
-    Item[] filter(OrePiece itemIn, Float strength);
+    Item[] filter(OrePieceItem itemIn, Float strength);
 }

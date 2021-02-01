@@ -1,4 +1,4 @@
-package com.timmist24.timsoresnstones.items.materials.ore.mineral;
+package com.timmist24.timsoresnstones.mineral;
 
 import com.timmist24.timsoresnstones.TimsOresNStonesMain;
 import com.timmist24.timsoresnstones.util.Util;
@@ -6,6 +6,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
+
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -14,8 +15,9 @@ public enum InitMineralsMethod { // lots of work to be done in initalising miner
     BRUTE_FORCE(() -> {
 
         TimsOresNStonesMain.logger.warn("Tosm using brute force to retreve minerals");// look for stones sand, gravle, clay, (make a silt) netherstone, endStone (dried variants, bricks ect) add stable memory of minerals somewhere to handle updates to minerals list
-        List<Mineral> mineralList = new ArrayList<>();
+        TreeSet<Mineral> mineralSet = new TreeSet<>();
         List<String> oreDictTites = new ArrayList<>();
+        List<String> allMinerals = new ArrayList<>();
         String[] names = OreDictionary.getOreNames();
         for(String name: names){
             if(Pattern.matches("(ingot|gem|crystal)\\w*", name)){
@@ -23,6 +25,9 @@ public enum InitMineralsMethod { // lots of work to be done in initalising miner
             }
         }
         Collection<Block> blocks = GameRegistry.findRegistry(Block.class).getValuesCollection();
+
+
+
         String modBeingScanned = "";
         for (Block block: blocks){
             String blockAsString = block.toString();
@@ -45,11 +50,13 @@ public enum InitMineralsMethod { // lots of work to be done in initalising miner
                         Matcher matcher2 = Pattern.compile(".+:(\\w+)").matcher(stateAsString);
                         String mineralTitle = (matcher1.matches() ? matcher1.group(1) : matcher2.matches() ? matcher2.group(1) : stateAsString).replaceAll("_ore", "");
                         //GET HARDNESS FOR MINERAL
-                        Mineral newMineral = new Mineral(mineralTitle, false, 10, 0, block, list.indexOf(state));
+                        Mineral newMineral = new Mineral(mineralTitle, false, 10, (char) 255, block, list.indexOf(state));
+                        //test.getEntries().remove();
 
                         foundMinerals.add(mineralTitle);
-                        if(!mineralList.contains(newMineral)) {
-                            mineralList.add(newMineral);
+                        allMinerals.add(modBeingScanned+":"+mineralTitle+"("+block.getUnlocalizedName()+")");
+                        if(!mineralSet.contains(newMineral)) {
+                            mineralSet.add(newMineral);
                             newMinerals.add(newMineral.toString());
                         }
                     }
@@ -57,8 +64,8 @@ public enum InitMineralsMethod { // lots of work to be done in initalising miner
                 TimsOresNStonesMain.logger.info("Found: "+blockAsString+", containing:"+foundMinerals+" that were ores, of which:"+newMinerals+ (newMinerals.size()>1?" were":" was")+" new.");
             }
         }
-        TimsOresNStonesMain.logger.info("Tims instance set up with"+ mineralList+"");
-        return mineralList;
+        TimsOresNStonesMain.logger.info("Tims instance set up with"+ mineralSet+"");
+        return mineralSet;
     }),
     JSON_FILES(() -> null);
 

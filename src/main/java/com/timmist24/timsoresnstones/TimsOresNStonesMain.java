@@ -3,7 +3,7 @@ package com.timmist24.timsoresnstones;
 import com.timmist24.timsoresnstones.init.ModBlocks;
 import com.timmist24.timsoresnstones.init.ModCreativeTabs;
 import com.timmist24.timsoresnstones.init.ModItems;
-import com.timmist24.timsoresnstones.items.materials.ore.mineral.Mineral;
+import com.timmist24.timsoresnstones.mineral.Mineral;
 import com.timmist24.timsoresnstones.proxy.CommonProxy;
 import com.timmist24.timsoresnstones.util.References;
 import net.minecraft.client.Minecraft;
@@ -40,8 +40,7 @@ public class TimsOresNStonesMain
     {
         Mineral.SetUpCollor();
         CREATIVE_TABS.updateIcone(ModItems.ORE,ModItems.PART, ModBlocks.COMPRESSED_IRON_ORE);
-        Minecraft.getMinecraft().getItemColors().registerItemColorHandler((IItemColor) ModItems.ORE, ModItems.ORE);
-        Minecraft.getMinecraft().getItemColors().registerItemColorHandler((IItemColor) ModItems.DUST, ModItems.DUST,ModItems.PART);
+        Minecraft.getMinecraft().getItemColors().registerItemColorHandler((IItemColor) ModItems.ORE, ModItems.ORE,ModItems.PART);
         Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler((IBlockColor) ModBlocks.COMPRESSED_IRON_ORE, ModBlocks.COMPRESSED_IRON_ORE);
 
         Minecraft.getMinecraft().getItemColors().registerItemColorHandler((IItemColor) ModItems.ORE, ModBlocks.COMPRESSED_IRON_ORE);

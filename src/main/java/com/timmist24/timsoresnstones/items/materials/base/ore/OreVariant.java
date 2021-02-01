@@ -1,4 +1,4 @@
-package com.timmist24.timsoresnstones.items.materials.ore;
+package com.timmist24.timsoresnstones.items.materials.base.ore;
 
 public enum OreVariant {
     PIECE(0),

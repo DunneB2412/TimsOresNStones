@@ -4,8 +4,6 @@ import com.timmist24.timsoresnstones.TimsOresNStonesMain;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.item.Item;
-import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NotNull;
 
 import java.awt.image.BufferedImage;
 import java.util.Arrays;
@@ -55,8 +53,7 @@ public class Color {
             return  Color.random(new Random());//thorium, boron, lithium, magnesium
         }
     }
-    @Contract(pure = true)
-    public static boolean similarColors(@NotNull Color colorA, @NotNull Color colorB) {
+    public static boolean similarColors(Color colorA, Color colorB) {
         int difARG = Math.abs(colorA.red-colorA.green);
         int difBRG = Math.abs(colorB.red-colorB.green);
 
@@ -90,14 +87,10 @@ public class Color {
 //        float avrage = (float) ((color.red+color.green+color.blue)/3);
 //        return new Color(avrage,avrage,avrage);
 //    }
-    @NotNull
-    @Contract(value = "_, _ -> new", pure = true)
     public static Color absCombine(Color colorA, Color colorB) {
         return combine(colorA, colorB, 0.5);
     }
-    @NotNull
-    @Contract(value = "_, _, _ -> new", pure = true)
-    public static Color combine(@NotNull Color colorA, @NotNull Color colorB, double splitForA) {
+    public static Color combine(Color colorA, Color colorB, double splitForA) {
         if(splitForA<0){
             return absCombine(colorA,colorB);
         }
@@ -108,9 +101,7 @@ public class Color {
         double alpha = colorA.alpha;
         return new Color(red, green, blue, alpha*255);
     }
-    @NotNull
-    @Contract("_ -> new")
-    public static Color random(@NotNull Random random) {
+    public static Color random(Random random) {
         return new Color(random.nextInt(255), random.nextInt(255),random.nextInt(255), 255);
     }
 

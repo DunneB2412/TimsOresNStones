@@ -1,4 +1,4 @@
-package com.timmist24.timsoresnstones.items.materials;
+package com.timmist24.timsoresnstones.items.materials.base.part;
 
 public enum PartVariant {
     INGOT(0,144),
